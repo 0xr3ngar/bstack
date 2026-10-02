@@ -2,6 +2,8 @@
 name: coding-best-practices
 description: How to plan changes, keep diffs small, and write TypeScript a junior can read line by line.
 disable-model-invocation: true
+license: MIT
+compatibility: "Requires access to the code under review."
 ---
 
 # Coding best practices

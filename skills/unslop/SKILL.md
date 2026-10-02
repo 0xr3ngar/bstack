@@ -2,6 +2,8 @@
 name: unslop
 description: Rewrite text so it reads like a person wrote it, not a template.
 disable-model-invocation: true
+license: MIT
+compatibility: "No external tools required."
 ---
 
 # Unslop
