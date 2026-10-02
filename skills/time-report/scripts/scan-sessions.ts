@@ -64,8 +64,11 @@ async function main() {
     { source: "pi", pattern: ".pi/agent/sessions/**/*.jsonl" },
     { source: "cursor", pattern: ".cursor/projects/*/agent-transcripts/**/*.jsonl" },
   ];
-  for (const { source, pattern } of sources) {
-    const files = await Array.fromAsync(new Bun.Glob(pattern).scan({ cwd: root, dot: true }));
+  const transcripts = await Promise.all(sources.map(async ({ source, pattern }) => ({
+    source,
+    files: await Array.fromAsync(new Bun.Glob(pattern).scan({ cwd: root, dot: true })),
+  })));
+  for (const { source, files } of transcripts) {
     for (const relative of files.sort()) {
       if (source === "claude" && relative.includes("claude-title")) {
         continue;

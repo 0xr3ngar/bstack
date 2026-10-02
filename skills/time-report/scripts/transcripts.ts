@@ -3,12 +3,14 @@ import { claudeSchema, contentSchema, codexSchema, cursorSchema, piSchema, textB
 
 export type TranscriptSource = "claude" | "cursor" | "codex" | "pi";
 
-type Entry = Readonly<{ project: string }> | Readonly<{
+type Message = Readonly<{
   role: "user" | "assistant" | "other";
   timestamp: number | null;
   text: string;
   searchableText: string;
 }>;
+
+type Entry = Readonly<{ project: string }> | Message;
 
 function readText(content: z.infer<typeof contentSchema> | undefined): string {
   if (typeof content === "string") {
@@ -43,7 +45,7 @@ function messageEntry(options: Readonly<{
   role: string;
   timestamp: string | undefined;
   content: z.infer<typeof contentSchema> | undefined;
-}>): Exclude<Entry, { project: string }> {
+}>): Message {
   const text = readText(options.content).replace(/<system-reminder>[\s\S]*?<\/system-reminder>/g, "");
   const stamp = Date.parse(options.timestamp ?? "");
   const timestamp = Number.isFinite(stamp) ? stamp : null;
@@ -135,62 +137,79 @@ function transcriptParser(source: TranscriptSource): (record: unknown) => Entry 
   }
 }
 
+function parseJson(line: string): unknown {
+  try {
+    return JSON.parse(line);
+  } catch {
+    return null;
+  }
+}
+
+function firstPrompt(messages: readonly Message[]): string {
+  for (const message of messages) {
+    if (message.role !== "user") {
+      continue;
+    }
+    const prompt = message.text.replace(/<timestamp>[^<]*<\/timestamp>\s*/g, "").trim();
+    if (prompt && !prompt.startsWith("<")) {
+      return prompt;
+    }
+  }
+  return "";
+}
+
+function conversationTimestamps(options: Readonly<{
+  messages: readonly Message[];
+  source: TranscriptSource;
+  modifiedAt: number;
+}>): number[] {
+  const timestamps = options.messages.map((message) => message.timestamp).filter((stamp) => stamp !== null);
+  const latest = timestamps.reduce((maximum, stamp) => Math.max(maximum, stamp), -Infinity);
+  if (options.source === "cursor" && timestamps.length > 0 && options.modifiedAt >= latest) {
+    return [...timestamps, options.modifiedAt];
+  }
+  return timestamps;
+}
+
+function conversationTickets(messages: readonly Message[]): Record<string, string> {
+  const tickets = new Map<string, string>();
+  messages.reduce<number | null>((previousTimestamp, message) => {
+    const timestamp = message.timestamp ?? previousTimestamp;
+    if (timestamp === null) {
+      return null;
+    }
+    for (const match of message.searchableText.matchAll(/\b[A-Z][A-Z0-9]+-\d+\b/g)) {
+      if (!tickets.has(match[0])) {
+        tickets.set(match[0], new Date(timestamp).toISOString());
+      }
+    }
+    return timestamp;
+  }, null);
+  return Object.fromEntries(tickets);
+}
+
+function conversationPullRequests(messages: readonly Message[]): string[] {
+  const links = messages.flatMap((message) =>
+    Array.from(message.searchableText.matchAll(/github\.com\/[\w.-]+\/[\w.-]+\/pull\/\d+/g), (match) => match[0]),
+  );
+  return [...new Set(links)].sort();
+}
+
 export function readTranscript(options: Readonly<{
   text: string;
   source: TranscriptSource;
   modifiedAt: number;
 }>) {
   const parse = transcriptParser(options.source);
-  const timestamps: number[] = [];
-  const tickets = new Map<string, string>();
-  const pullRequests = new Set<string>();
-  let firstPrompt = "";
-  let project: string | null = null;
-  let lastTimestamp: number | null = null;
-  let latestTimestamp: number | null = null;
-
-  for (const line of options.text.split(/\r?\n/)) {
-    let record: unknown;
-    try {
-      record = JSON.parse(line);
-    } catch {
-      continue;
-    }
-    const entry = parse(record);
-    if (!entry) {
-      continue;
-    }
-    if ("project" in entry) {
-      project ??= entry.project;
-      continue;
-    }
-    if (entry.timestamp !== null) {
-      timestamps.push(entry.timestamp);
-      lastTimestamp = entry.timestamp;
-      latestTimestamp = Math.max(latestTimestamp ?? entry.timestamp, entry.timestamp);
-    }
-    if (entry.role === "user" && !firstPrompt) {
-      const prompt = entry.text.replace(/<timestamp>[^<]*<\/timestamp>\s*/g, "").trim();
-      if (!prompt.startsWith("<")) {
-        firstPrompt = prompt;
-      }
-    }
-    if (lastTimestamp !== null) {
-      for (const match of entry.searchableText.matchAll(/\b[A-Z][A-Z0-9]+-\d+\b/g)) {
-        if (!tickets.has(match[0])) {
-          tickets.set(match[0], new Date(lastTimestamp).toISOString());
-        }
-      }
-    }
-    for (const match of entry.searchableText.matchAll(/github\.com\/[\w.-]+\/[\w.-]+\/pull\/\d+/g)) {
-      pullRequests.add(match[0]);
-    }
-  }
-
-  if (options.source === "cursor" && latestTimestamp !== null && options.modifiedAt >= latestTimestamp) {
-    timestamps.push(options.modifiedAt);
-  }
-  return { project, timestamps, firstPrompt, tickets: Object.fromEntries(tickets), pullRequests: [...pullRequests].sort() };
+  const entries = options.text.split(/\r?\n/).map((line) => parse(parseJson(line))).filter((entry) => entry !== null);
+  const messages = entries.filter((entry) => "role" in entry);
+  return {
+    project: entries.find((entry) => "project" in entry)?.project ?? null,
+    timestamps: conversationTimestamps({ messages, source: options.source, modifiedAt: options.modifiedAt }),
+    firstPrompt: firstPrompt(messages),
+    tickets: conversationTickets(messages),
+    pullRequests: conversationPullRequests(messages),
+  };
 }
 
 export function measureActivity(options: Readonly<{
@@ -199,25 +218,17 @@ export function measureActivity(options: Readonly<{
   until: number;
   gapMinutes: number;
 }>) {
-  const timestamps: number[] = [];
-  for (const timestamp of options.timestamps) {
-    if (timestamp >= options.since && timestamp < options.until) {
-      timestamps.push(timestamp);
+  const timestamps = options.timestamps
+    .filter((timestamp) => timestamp >= options.since && timestamp < options.until)
+    .toSorted((a, b) => a - b);
+  const milliseconds = timestamps.reduce((total, timestamp, index) => {
+    const previous = timestamps[index - 1];
+    if (previous === undefined) {
+      return total;
     }
-  }
-  timestamps.sort((a, b) => a - b);
-
-  let milliseconds = 0;
-  let previous: number | undefined;
-  for (const timestamp of timestamps) {
-    if (previous !== undefined) {
-      const gap = timestamp - previous;
-      if (gap < options.gapMinutes * 60_000) {
-        milliseconds += gap;
-      }
-    }
-    previous = timestamp;
-  }
+    const gap = timestamp - previous;
+    return gap < options.gapMinutes * 60_000 ? total + gap : total;
+  }, 0);
 
   const start = timestamps.at(0);
   const end = timestamps.at(-1);
