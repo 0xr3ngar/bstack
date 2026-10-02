@@ -8,8 +8,8 @@ Install the Bun version in [.bun-version](.bun-version), then run:
 
 ```bash
 bun install --frozen-lockfile
-bun run typecheck
-bun test
+bun run check
+bun run check:install
 ```
 
 Bun runs the TypeScript directly. TypeScript checks types during development. Installed skills must not depend on this repository's `node_modules` directory.

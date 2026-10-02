@@ -2,10 +2,11 @@ import { afterEach, expect, test } from "bun:test";
 import { mkdtemp, mkdir, rm, utimes, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { measureActivity, readTranscript } from "../skills/time-report/scripts/transcripts.ts";
 
 const temporaryDirectories: string[] = [];
-const scanner = new URL("../skills/time-report/scripts/scan-sessions.ts", import.meta.url).pathname;
+const scanner = fileURLToPath(new URL("../skills/time-report/scripts/scan-sessions.ts", import.meta.url));
 const since = Date.parse("2026-10-01T00:00:00Z");
 const until = Date.parse("2026-10-02T00:00:00Z");
 
