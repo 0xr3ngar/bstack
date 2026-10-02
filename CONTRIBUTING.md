@@ -1,6 +1,6 @@
 # Contributing to bStack
 
-Keep each skill focused on one workflow. Explain when to use it, what it needs, and what it produces.
+Keep each skill focused on one outcome. Explain when to use it, what it needs, and how the agent knows it is done. Follow the [bStack philosophy](PHILOSOPHY.md).
 
 ## Set up the repository
 
@@ -35,6 +35,8 @@ Do not add an `openai.yaml` file when no Codex-specific setting is needed. Do no
 ## Write instructions
 
 Use plain words and concrete steps. Keep facts, commands, and file paths accurate. Remove filler and unsupported claims. Follow the [unslop checklist](skills/unslop/SKILL.md) for prose. Preserve license text verbatim.
+
+Let the agent resolve routine uncertainty from available evidence. Define when a decision needs the user and what the agent can finish independently. Keep each installed skill self-contained; do not rely on the reader having this repository or its philosophy document.
 
 State what happens when a required tool is unavailable. Ask for authorization before a workflow sends messages or writes to an external service unless the user's request already authorizes that action.
 

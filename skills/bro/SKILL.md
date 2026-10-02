@@ -6,4 +6,10 @@ license: MIT
 compatibility: "No external tools required."
 ---
 
-Restate your last message. Stop using jargon and speak coherently. State it more simply and concisely, like one human talking to another.
+# Bro
+
+Restate your last response in plain language. Lead with the answer and explain only what the user needs to understand it.
+
+Keep the facts, uncertainty, and consequences. Replace jargon with what the thing does. Use a short example if it makes a difficult point clearer.
+
+Return the rewritten response directly. Do not explain the rewrite or start new work.
