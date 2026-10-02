@@ -1,24 +1,28 @@
-# bstack
+# bStack
 
-My personal AI agent skills. I use most of them almost every day. Each one is a short workflow you invoke by name or attach to a message.
-
-## Skills
-
-- **unslop**: rewrite text so it does not read like a template.
-- **no-comments**: list comments in scope, delete the removable ones, flag symbols that need code fixes.
-- **coding-best-practices**: plan work, keep diffs small, write readable TypeScript.
-- **yeet**: push the branch and open a draft PR with `gh`, conventional commits, and an unslop PR body.
-- **bro**: restate the last reply in plain language, no jargon.
-- **time-report**: find your Claude Code and Cursor conversations for a day, measure how long each took per ticket, and optionally log the hours to Jira.
+Minimal, opinionated skills for AI agents.
 
 ## Install
 
-Copy or symlink `skills/*` into wherever your agent loads skills (for example `.cursor/skills` or a personal skills directory). Each skill is one folder with a `SKILL.md` file.
+```bash
+bunx --bun skills add 0xr3ngar/bstack
+```
 
-## Credits
+Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompted. Add `--global` to install across projects, or `--skill unslop` to pick one skill.
 
-Some skills started from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by [poteto](https://github.com/poteto). This repo trims and rewrites them for bstack.
+## Skills
 
-## License
+| Skill | What it does |
+| --- | --- |
+| [unslop](skills/unslop/SKILL.md) | Cut filler and template language from prose. |
+| [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
+| [coding-best-practices](skills/coding-best-practices/SKILL.md) | Keep changes small and TypeScript readable. |
+| [no-comments](skills/no-comments/SKILL.md) | Remove redundant comments and flag unclear code. |
+| [yeet](skills/yeet/SKILL.md) | Push a branch and open a draft PR. |
+| [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from Claude Code and Cursor history. |
 
-[MIT](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for upstream attribution.
+## Usage
+
+Invoke skills with `/unslop` in Claude Code or Cursor, or `$unslop` in Codex. Each skill lists its own requirements and workflow.
+
+[MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
