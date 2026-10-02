@@ -25,4 +25,4 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 
 Invoke skills with `/unslop` in Claude Code or Cursor, or `$unslop` in Codex. Each skill lists its own requirements and workflow.
 
-[Contributing](CONTRIBUTING.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
