@@ -73,7 +73,13 @@ function parseCursor(record: unknown): Entry | null {
   const { role, timestamp, message, content } = result.data;
   const entry = messageEntry({ role, timestamp, content: message?.content ?? content });
   if (role === "user") {
-    return { ...entry, timestamp: cursorTimestamp(entry.text) ?? entry.timestamp };
+    const query = /<user_query>([\s\S]*?)<\/user_query>/.exec(entry.text)?.[1];
+    return {
+      ...entry,
+      text: query?.trim() ?? entry.text,
+      searchableText: query ?? entry.searchableText,
+      timestamp: cursorTimestamp(entry.text) ?? entry.timestamp,
+    };
   }
   return entry;
 }
