@@ -12,7 +12,7 @@ Minimal, opinionated skills for AI agents.
 | [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
 | [coding-best-practices](skills/coding-best-practices/SKILL.md) | Keep changes small and TypeScript readable. |
 | [no-comments](skills/no-comments/SKILL.md) | Remove redundant comments and flag unclear code. |
-| [yeet](skills/yeet/SKILL.md) | Open or update a PR and follow through on checks and reviews. |
+| [yeet](skills/yeet/SKILL.md) | Open a draft PR and work through your review comments. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
 
 ## Install

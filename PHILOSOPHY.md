@@ -8,7 +8,11 @@ Bring the agent in when you discover a problem. Let it inspect the evidence and 
 
 ## Own the whole job
 
-When the task includes implementation and delivery, carry it through a working change, a usable preview where relevant, and a PR. Follow checks, evaluate review feedback, and fix valid findings. Opening the PR does not finish work that still needs attention.
+For an implementation task, produce a working change, a usable preview where relevant, and a draft PR. Tell the user the draft is open and ready for their comments. They can review on GitHub or in their review tool of choice.
+
+While the PR is a draft, listen for the user's comments, fix the issues, check the changes, and resolve the addressed threads. Keep that back-and-forth going without requiring the user to copy comments into chat. Bring feedback from other reviewers to the user with a recommendation.
+
+The user decides when to mark the PR ready for review. From then on, explain incoming feedback and recommend whether to address it. Wait for their decision before changing code or resolving threads. The PR's state determines how the agent handles feedback; making it ready does not authorize a merge.
 
 People still intervene when an agent gets stuck or a decision needs their judgment. Autonomy means handling more between those interventions. Ask with evidence and a recommendation, and continue work that does not depend on the answer.
 
