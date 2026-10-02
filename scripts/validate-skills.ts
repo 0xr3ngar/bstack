@@ -66,8 +66,9 @@ export async function validateSkills(root: string): Promise<string[]> {
   }
 
   const markdownFiles = new Bun.Glob("**/*.md").scan({ cwd: root, dot: true });
-  for await (const path of markdownFiles) {
-    const directory = path.split(/[\\/]/)[0];
+  for await (const file of markdownFiles) {
+    const path = file.replaceAll("\\", "/");
+    const directory = path.split("/")[0];
     if (directory === "node_modules" || directory === ".git") {
       continue;
     }
