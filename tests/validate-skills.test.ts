@@ -45,3 +45,11 @@ test("README omissions fail validation", async () => {
   await writeFile(join(root, "readme.md"), "# Skills\n");
   expect(await validateSkills(root)).toEqual(["skills/example/SKILL.md: Add this skill to the README catalog."]);
 });
+
+
+test("dependency documentation is excluded on every platform", async () => {
+  const root = await fixture();
+  await mkdir(join(root, "node_modules/example"), { recursive: true });
+  await writeFile(join(root, "node_modules/example/README.md"), "[Missing upstream file](missing.md)\n");
+  expect(await validateSkills(root)).toEqual([]);
+});
