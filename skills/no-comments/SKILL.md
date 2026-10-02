@@ -2,6 +2,8 @@
 name: no-comments
 description: Scan scoped files, report comments worth removing, delete them, and list symbols that need code changes.
 disable-model-invocation: true
+license: MIT
+compatibility: "Requires repository access and its validation tools."
 ---
 
 # No comments

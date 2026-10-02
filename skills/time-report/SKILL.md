@@ -1,11 +1,13 @@
 ---
 name: time-report
-description: "Find every Claude Code, Cursor, Codex, and Pi conversation in a time range, measure how long each one took, and attribute the time to tickets and PRs. Optionally log the hours to Jira. Use for 'how much time did I spend yesterday', 'find my conversations and how long they took', 'log my hours', morning time reports."
+description: "Estimate active work time from local Claude Code, Cursor, Codex, and Pi conversations and attribute it to tickets and PRs. Optionally log the hours to Jira. Use for 'how much time did I spend yesterday', 'find my conversations and how long they took', 'log my hours', morning time reports."
+license: MIT
+compatibility: "Requires Bun 1.4 or newer and local Claude Code, Cursor, Codex, or Pi transcripts. GitHub CLI and Jira access are optional."
 ---
 
 # Time report
 
-Measure how long the user worked, per ticket, from their conversation history. The default range is yesterday.
+Estimate active work time per ticket from conversation history. These estimates describe gaps between recorded messages, not continuous observation of the user. The default range is yesterday.
 
 ## 1. Scan the conversations
 
@@ -35,7 +37,7 @@ bun <skill-dir>/scripts/scan-sessions.ts --since YYYY-MM-DD --until YYYY-MM-DD \
 
 An empty result does not prove there was no activity. Confirm the locations and requested dates before drawing that conclusion.
 
-Codex and Pi use the working directory in the session header as the project. It prints UTC timestamps in one JSON line per conversation with `source`, `project`, `file`, `start`, `end`, `active_seconds`, `first_prompt`, `tickets` (key and the time it was first mentioned), and `pull_requests`.
+Codex and Pi use the working directory in the session header as the project. It prints UTC timestamps in one JSON line per conversation with `source`, `project`, `file`, `start`, `end`, `active_seconds`, `first_prompt`, `tickets` with each key and its first mention time, and `pull_requests`.
 
 Conversations with less than one minute of estimated activity are omitted. Use `--home PATH` to scan these paths under another home directory and `--gap-minutes N` to change the idle threshold. Bun downloads the pinned Zod dependency on first run. Later runs use its local cache.
 
@@ -48,7 +50,7 @@ Active time is the sum of the gaps between messages that are shorter than 15 min
 - Short conversations that another conversation started (security reviews, Cursor subagents, `/tmp` worktrees) overlap their parent. Don't add them on top of the parent's time.
 - If a ticket has no conversation, say so. Don't invent time.
 
-## 3. Add review time for merged PRs
+## 3. Look up PR state and waiting time
 
 For each ticket with a PR, get the open and merge times:
 
@@ -56,20 +58,23 @@ For each ticket with a PR, get the open and merge times:
 gh pr view <number> --repo <owner/repo> --json createdAt,mergedAt,state
 ```
 
-Review time is from PR open to merge. Count only working hours (09:00 to 18:00 local), so nights and weekends are left out. Implementation time is the conversation time before the PR was opened.
+If GitHub access is unavailable, report the conversation estimates and say that PR state was not checked.
+
+PR waiting time runs from open to merge. It is elapsed time, not work performed. Show it separately when useful. Do not add it to active work time or log it to Jira. Keep conversation activity after PR creation, since review fixes are work too.
 
 ## 4. Show the report
 
-Show one table: ticket, PR and state, implementation time, review time, total. Give exact times down to the second. Then list conversations that matched no ticket, with their first prompt and active time, so the user can assign them.
+Show a table with the ticket, PR state, estimated active work time, and optional PR waiting time. Round displayed work estimates to minutes. Do not imply second-level accuracy from Cursor's minute-level timestamps.
+
+List conversations with no ticket, their first prompts, and estimated activity so the user can assign them. State any assumptions about overlapping sessions or ticket attribution.
 
 Stop here unless the user asked to log the hours.
 
-## 5. Log to Jira (only when asked)
+## 5. Log to Jira when asked
 
-Confirm the table with the user before writing anything. Then, for each ticket:
+Confirm the table with the user before writing. Jira access is required for this step. If it is unavailable, return the table without claiming that hours were logged.
 
-- Log the total as a worklog, with `started` set to the first activity. Jira only takes whole minutes, so round to the nearest minute.
-- Add a comment with the exact breakdown: implementation time and where it came from, the PR open and merge times, and the rounding note.
-- Move a ticket to Done only if its PR is merged and the user asked for it. The Done transition may accept the worklog in the same call.
-
-If a ticket already has a worklog for the same work, update it instead of adding a second one.
+- Log only the approved active work estimate, rounded to the nearest whole minute. Set `started` to the first activity.
+- Add a comment with the conversation sources, attribution assumptions, and rounding note.
+- Move a ticket to Done only if its PR is merged and the user asked for that transition.
+- Update an existing worklog for the same work instead of adding a duplicate.
