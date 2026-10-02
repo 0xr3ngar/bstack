@@ -9,6 +9,7 @@ My personal AI agent skills. I use most of them almost every day. Each one is a 
 - **coding-best-practices**: plan work, keep diffs small, write readable TypeScript.
 - **yeet**: push the branch and open a draft PR with `gh`, conventional commits, and an unslop PR body.
 - **bro**: restate the last reply in plain language, no jargon.
+- **time-report**: find your Claude Code and Cursor conversations for a day, measure how long each took per ticket, and optionally log the hours to Jira.
 
 ## Install
 
