@@ -2,23 +2,15 @@
 
 bStack aims for more completed work per human interruption. Give an agent a problem, enough context, and clear boundaries. It should investigate, make decisions within those boundaries, and return with a result it has checked.
 
-## Bring the agent in early
+## Start with the problem
 
-Theo [@t3dotgg](https://github.com/t3dotgg) describes this in [If you have a Claude sub, watch this](https://youtu.be/D8PikZ1KhUo). In the [33:00–37:00 passage](https://youtu.be/D8PikZ1KhUo?t=1980), he argues for involving the agent when you discover a problem, before prescribing a solution:
-
-> give the agent the problem instead of the solution
-
-That [line at 34:31](https://youtu.be/D8PikZ1KhUo?t=2071) informs how bStack skills start. Inspect the evidence, question assumptions, and look for a simpler fix. Routine uncertainty is something the agent should investigate.
+Bring the agent in when you discover a problem. Let it inspect the evidence and question assumptions before prescribing a solution. Routine uncertainty is something it should investigate. A reversible implementation choice rarely needs a handoff to the user.
 
 ## Own the whole job
 
-In the [45:00–48:00 passage](https://youtu.be/D8PikZ1KhUo?t=2700), Theo describes handing over implementation, a usable preview, the PR, and follow-up. His aim is that:
+When the task includes implementation and delivery, carry it through a working change, a usable preview where relevant, and a PR. Follow checks, evaluate review feedback, and fix valid findings. Opening the PR does not finish work that still needs attention.
 
-> the next time you check that thread, you're ready to merge
-
-The [line at 47:09](https://youtu.be/D8PikZ1KhUo?t=2829) gives us a useful completion standard. When those steps are in scope, opening a PR is part of the job. The agent should inspect the result, follow checks, evaluate review feedback, and fix valid findings.
-
-Theo also describes intervening when an agent gets stuck or needs his judgment. Autonomy expands how much work happens between those interventions. For bStack, that means asking with evidence and a recommendation when a decision needs the user, while continuing work that does not depend on the answer.
+People still intervene when an agent gets stuck or a decision needs their judgment. Autonomy means handling more between those interventions. Ask with evidence and a recommendation, and continue work that does not depend on the answer.
 
 ## Keep instructions small
 
@@ -31,3 +23,10 @@ Verification should fit the work. Inspect a UI change in the UI. Reproduce a bug
 Use permission already granted. Finish reversible preparation before asking for a decision. Merging, deploying, sending messages, or changing external records still needs authorization covering that action.
 
 Skills guide behavior. The host supplies tools, access, and the ability to keep running. If those are missing, complete what is possible and name the remaining blocker. Never claim a result was checked or promise continued monitoring without the means to do it.
+
+## Inspiration
+
+Theo [@t3dotgg](https://github.com/t3dotgg) discusses this approach in [If you have a Claude sub, watch this](https://youtu.be/D8PikZ1KhUo). Two passages informed these defaults:
+
+- [33:00–37:00](https://youtu.be/D8PikZ1KhUo?t=1980), involving the agent early: "give the agent the problem instead of the solution".
+- [45:00–48:00](https://youtu.be/D8PikZ1KhUo?t=2700), following through on delivery: "the next time you check that thread, you're ready to merge".
