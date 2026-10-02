@@ -1,6 +1,6 @@
 ---
 name: time-report
-description: "Find every Claude Code and Cursor conversation in a time range, measure how long each one took, and attribute the time to tickets and PRs. Optionally log the hours to Jira. Use for 'how much time did I spend yesterday', 'find my conversations and how long they took', 'log my hours', morning time reports."
+description: "Find every Claude Code, Cursor, Codex, and Pi conversation in a time range, measure how long each one took, and attribute the time to tickets and PRs. Optionally log the hours to Jira. Use for 'how much time did I spend yesterday', 'find my conversations and how long they took', 'log my hours', morning time reports."
 ---
 
 # Time report
@@ -17,9 +17,16 @@ bun <skill-dir>/scripts/scan-sessions.ts --since YYYY-MM-DD --until YYYY-MM-DD
 
 Both dates are local midnights and `--until` is exclusive. With no flags it scans yesterday. Pick the range from what the user asked, and if yesterday was a weekend day, ask whether they meant the last working day.
 
-The script reads `~/.claude/projects/*/*.jsonl` and `~/.cursor/projects/*/agent-transcripts/**/*.jsonl`. It prints UTC timestamps in one JSON line per conversation with `source`, `project`, `file`, `start`, `end`, `active_seconds`, `first_prompt`, `tickets` (key and the time it was first mentioned), and `pull_requests`.
+The script reads local JSONL transcripts from:
 
-Conversations with less than one minute of estimated activity are omitted. Use `--home PATH` to scan another transcript directory and `--gap-minutes N` to change the idle threshold. No package installation is needed to run the scanner.
+- Claude Code: `~/.claude/projects/*/*.jsonl`
+- Cursor: `~/.cursor/projects/*/agent-transcripts/**/*.jsonl`
+- Codex: `~/.codex/sessions/**/*.jsonl` and `~/.codex/archived_sessions/**/*.jsonl`
+- Pi: `~/.pi/agent/sessions/**/*.jsonl`
+
+Codex and Pi use the working directory in the session header as the project. It prints UTC timestamps in one JSON line per conversation with `source`, `project`, `file`, `start`, `end`, `active_seconds`, `first_prompt`, `tickets` (key and the time it was first mentioned), and `pull_requests`.
+
+Conversations with less than one minute of estimated activity are omitted. Use `--home PATH` to scan these paths under another home directory and `--gap-minutes N` to change the idle threshold. Bun downloads the pinned Zod dependency on first run. Later runs use its local cache.
 
 Active time is the sum of the gaps between messages that are shorter than 15 minutes. Longer gaps count as time away. Cursor timestamps user messages to the minute. The scanner uses the last write time as the final edge when it follows those messages. It does not use filesystem creation times.
 

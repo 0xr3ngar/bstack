@@ -59,6 +59,9 @@ async function main() {
   const root = resolve(values.home);
   const sources: ReadonlyArray<Readonly<{ source: TranscriptSource; pattern: string }>> = [
     { source: "claude", pattern: ".claude/projects/*/*.jsonl" },
+    { source: "codex", pattern: ".codex/sessions/**/*.jsonl" },
+    { source: "codex", pattern: ".codex/archived_sessions/**/*.jsonl" },
+    { source: "pi", pattern: ".pi/agent/sessions/**/*.jsonl" },
     { source: "cursor", pattern: ".cursor/projects/*/agent-transcripts/**/*.jsonl" },
   ];
   for (const { source, pattern } of sources) {
@@ -77,7 +80,7 @@ async function main() {
       }
       process.stdout.write(`${JSON.stringify({
         source,
-        project: relative.split(/[\\/]/)[2],
+        project: transcript.project ?? relative.split(/[\\/]/)[2],
         file,
         ...activity,
         first_prompt: transcript.firstPrompt.slice(0, 200).replace(/\r?\n/g, " "),

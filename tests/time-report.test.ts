@@ -137,3 +137,54 @@ for (const args of [
     expect(result.stderr.length).toBeGreaterThan(0);
   });
 }
+
+for (const directory of ["sessions/2026/10/01", "archived_sessions"]) {
+  test(`CLI reads Codex ${directory} without attributing injected context or tool output`, async () => {
+    const home = await fixtureHome();
+    const file = await writeTranscript(home, `.codex/${directory}/rollout.jsonl`, [
+      { type: "session_meta", timestamp: "2026-10-01T09:00:00Z", payload: { cwd: "/work/demo" } },
+      { type: "response_item", timestamp: "2026-10-01T09:01:00Z", payload: { type: "message", role: "developer", content: [{ type: "input_text", text: "HIDDEN-1" }] } },
+      { type: "response_item", timestamp: "2026-10-01T09:02:00Z", payload: { type: "message", role: "user", content: [{ type: "input_text", text: "# AGENTS.md instructions\nHIDDEN-2" }] } },
+      { type: "response_item", timestamp: "2026-10-01T10:00:00Z", payload: { type: "message", role: "user", content: [{ type: "input_text", text: "Fix APP-7" }] } },
+      { type: "event_msg", timestamp: "2026-10-01T10:01:00Z", payload: { type: "user_message", message: "Fix APP-7" } },
+      { type: "response_item", timestamp: "2026-10-01T10:02:00Z", payload: { type: "function_call", arguments: '{"command":"git show APP-8"}' } },
+      { type: "response_item", timestamp: "2026-10-01T10:03:00Z", payload: { type: "custom_tool_call", input: "git show APP-9" } },
+      { type: "response_item", timestamp: "2026-10-01T10:04:00Z", payload: { type: "function_call_output", output: "NOISE-99" } },
+      { type: "response_item", timestamp: "2026-10-01T10:05:00Z", payload: { type: "message", role: "assistant", content: [{ type: "output_text", text: "Opened https://github.com/acme/demo/pull/12" }] } },
+      { type: "event_msg", timestamp: "2026-10-01T10:14:00Z", payload: { type: "token_count" } },
+    ]);
+    const result = await runScanner(home, ["--since", "2026-10-01", "--until", "2026-10-02"]);
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toBe("");
+    expect(JSON.parse(result.stdout)).toEqual({
+      source: "codex", project: "/work/demo", file,
+      start: "2026-10-01T10:00:00.000Z", end: "2026-10-01T10:05:00.000Z", active_seconds: 300,
+      first_prompt: "Fix APP-7",
+      tickets: { "APP-7": "2026-10-01T10:00:00.000Z", "APP-8": "2026-10-01T10:02:00.000Z", "APP-9": "2026-10-01T10:03:00.000Z" },
+      pull_requests: ["github.com/acme/demo/pull/12"],
+    });
+  });
+}
+
+test("CLI reads Pi messages and tool calls without attributing summaries or tool output", async () => {
+  const home = await fixtureHome();
+  const file = await writeTranscript(home, ".pi/agent/sessions/--work-demo--/session.jsonl", [
+    { type: "session", version: 3, timestamp: "2026-10-01T09:00:00Z", cwd: "/work/demo" },
+    { type: "message", timestamp: "2026-10-01T09:01:00Z", message: { role: "system", content: "HIDDEN-1" } },
+    { type: "message", timestamp: "2026-10-01T10:00:00Z", message: { role: "user", content: "Fix APP-7" } },
+    { type: "message", timestamp: "2026-10-01T10:02:00Z", message: { role: "assistant", content: [{ type: "toolCall", name: "bash", arguments: { command: "git show APP-8" } }] } },
+    { type: "message", timestamp: "2026-10-01T10:03:00Z", message: { role: "toolResult", content: [{ type: "text", text: "NOISE-99" }] } },
+    { type: "message", timestamp: "2026-10-01T10:05:00Z", message: { role: "assistant", content: [{ type: "text", text: "Opened https://github.com/acme/demo/pull/12" }] } },
+    { type: "compaction", timestamp: "2026-10-01T10:14:00Z", summary: "NOISE-88" },
+  ]);
+  const result = await runScanner(home, ["--since", "2026-10-01", "--until", "2026-10-02"]);
+  expect(result.exitCode).toBe(0);
+  expect(result.stderr).toBe("");
+  expect(JSON.parse(result.stdout)).toEqual({
+    source: "pi", project: "/work/demo", file,
+    start: "2026-10-01T10:00:00.000Z", end: "2026-10-01T10:05:00.000Z", active_seconds: 300,
+    first_prompt: "Fix APP-7",
+    tickets: { "APP-7": "2026-10-01T10:00:00.000Z", "APP-8": "2026-10-01T10:02:00.000Z" },
+    pull_requests: ["github.com/acme/demo/pull/12"],
+  });
+});
