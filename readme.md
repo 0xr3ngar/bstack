@@ -23,8 +23,4 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | [yeet](skills/yeet/SKILL.md) | Push a branch and open a draft PR. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
 
-## Usage
-
-Invoke skills with `/unslop` in Claude Code or Cursor, or `$unslop` in Codex. Each skill lists its own requirements and workflow.
-
 [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
