@@ -29,12 +29,15 @@ async function main() {
       until: { type: "string" },
       "gap-minutes": { type: "string", default: "15" },
       home: { type: "string", default: homedir() },
+      transcripts: { type: "string", multiple: true },
       help: { type: "boolean", short: "h" },
     },
   });
   if (values.help) {
     process.stdout.write([
       "Usage: bun scan-sessions.ts [--since YYYY-MM-DD] [--until YYYY-MM-DD] [--gap-minutes 15] [--home PATH]",
+      "Use --transcripts SOURCE=DIR to replace a source’s default locations. Repeat for multiple directories.",
+      "Sources: claude, cursor, codex, pi. Custom directories are searched recursively for JSONL files.",
       "Dates use local midnight. --until is exclusive. The default range is yesterday.",
       "Output is one JSON object per conversation with at least one minute of estimated activity.",
       "",
@@ -64,16 +67,35 @@ async function main() {
     { source: "pi", pattern: ".pi/agent/sessions/**/*.jsonl" },
     { source: "cursor", pattern: ".cursor/projects/*/agent-transcripts/**/*.jsonl" },
   ];
-  const transcripts = await Promise.all(sources.map(async ({ source, pattern }) => ({
-    source,
-    files: await Array.fromAsync(new Bun.Glob(pattern).scan({ cwd: root, dot: true })),
+  const overrides = (values.transcripts ?? []).map((value) => {
+    const separator = value.indexOf("=");
+    const source = sources.find((item) => item.source === value.slice(0, separator))?.source;
+    const directory = value.slice(separator + 1);
+    if (separator < 1 || !source || !directory.trim()) {
+      throw new Error("Use --transcripts SOURCE=DIR, where SOURCE is claude, cursor, codex, or pi.");
+    }
+    return { source, directory: resolve(directory), pattern: "**/*.jsonl", projectIndex: 0 };
+  });
+  const locations = [
+    ...sources.filter(({ source }) => !overrides.some((override) => override.source === source))
+      .map((source) => ({ ...source, directory: root, projectIndex: 2 })),
+    ...overrides,
+  ];
+  const transcripts = await Promise.all(locations.map(async (location) => ({
+    ...location,
+    files: await Array.fromAsync(new Bun.Glob(location.pattern).scan({ cwd: location.directory, dot: true })),
   })));
-  for (const { source, files } of transcripts) {
+  const visited = new Set<string>();
+  for (const { source, directory, projectIndex, files } of transcripts) {
     for (const relative of files.sort()) {
       if (source === "claude" && relative.includes("claude-title")) {
         continue;
       }
-      const file = join(root, relative);
+      const file = join(directory, relative);
+      if (visited.has(file)) {
+        continue;
+      }
+      visited.add(file);
       const modifiedAt = (await stat(file)).mtimeMs;
       if (modifiedAt < since) {
         continue;
@@ -86,7 +108,7 @@ async function main() {
       }
       process.stdout.write(`${JSON.stringify({
         source,
-        project: transcript.project ?? relative.split(/[\\/]/)[2],
+        project: transcript.project ?? relative.split(/[\\/]/)[projectIndex],
         file,
         ...activity,
         first_prompt: transcript.firstPrompt.slice(0, 200).replace(/\r?\n/g, " "),

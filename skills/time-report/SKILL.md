@@ -9,6 +9,8 @@ Measure how long the user worked, per ticket, from their conversation history. T
 
 ## 1. Scan the conversations
 
+First locate the user's transcript files. Check the agent's configuration, environment, and any paths the user supplied. Verify that the directories contain session JSONL files; do not assume the defaults exist or contain the history the user wants. If the location is still unclear, ask the user.
+
 Run [the scanner](scripts/scan-sessions.ts) with Bun 1.4 or newer:
 
 ```bash
@@ -17,12 +19,21 @@ bun <skill-dir>/scripts/scan-sessions.ts --since YYYY-MM-DD --until YYYY-MM-DD
 
 Both dates are local midnights and `--until` is exclusive. With no flags it scans yesterday. Pick the range from what the user asked, and if yesterday was a weekend day, ask whether they meant the last working day.
 
-The script reads local JSONL transcripts from:
+Likely locations, also used as the scanner defaults:
 
 - Claude Code: `~/.claude/projects/*/*.jsonl`
 - Cursor: `~/.cursor/projects/*/agent-transcripts/**/*.jsonl`
 - Codex: `~/.codex/sessions/**/*.jsonl` and `~/.codex/archived_sessions/**/*.jsonl`
 - Pi: `~/.pi/agent/sessions/**/*.jsonl`
+
+For files stored elsewhere, pass the verified directory with `--transcripts SOURCE=DIR`. This replaces the defaults for that source and searches the directory recursively. Repeat the option to include multiple directories, including any separate archive:
+
+```bash
+bun <skill-dir>/scripts/scan-sessions.ts --since YYYY-MM-DD --until YYYY-MM-DD \
+  --transcripts "codex=/path/to/sessions" --transcripts "pi=/another/path/sessions"
+```
+
+An empty result does not prove there was no activity. Confirm the locations and requested dates before drawing that conclusion.
 
 Codex and Pi use the working directory in the session header as the project. It prints UTC timestamps in one JSON line per conversation with `source`, `project`, `file`, `start`, `end`, `active_seconds`, `first_prompt`, `tickets` (key and the time it was first mentioned), and `pull_requests`.
 

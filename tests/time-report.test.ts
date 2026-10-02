@@ -129,6 +129,9 @@ for (const args of [
   ["--gap-minutes", "0"],
   ["--gap-minutes", "nope"],
   ["--unknown"],
+  ["--transcripts", "unknown=/tmp"],
+  ["--transcripts", "codex="],
+  ["--transcripts", "codex"],
 ]) {
   test(`CLI rejects invalid arguments: ${args.join(" ")}`, async () => {
     const result = await runScanner(await fixtureHome(), args);
@@ -208,3 +211,37 @@ for (const [modifiedAt, expectedCount] of [
     expect(result.stdout.trim().split("\n").filter(Boolean)).toHaveLength(expectedCount);
   });
 }
+
+test("CLI reads custom directories, replaces source defaults, and skips duplicate paths", async () => {
+  const home = await fixtureHome();
+  const external = await fixtureHome();
+  const codex = [
+    { type: "session_meta", payload: { cwd: "/work/demo" } },
+    { type: "response_item", timestamp: "2026-10-01T10:00:00Z", payload: { type: "message", role: "user", content: "Fix APP-7" } },
+    { type: "response_item", timestamp: "2026-10-01T10:05:00Z", payload: { type: "message", role: "assistant", content: "Done" } },
+  ];
+  await writeTranscript(home, ".codex/sessions/default.jsonl", codex);
+  const files = [
+    await writeTranscript(external, "custom codex/nested/session.jsonl", codex),
+    await writeTranscript(external, "archive/session.jsonl", codex),
+    await writeTranscript(external, "custom pi/session.jsonl", [
+      { type: "session", cwd: "/work/demo" },
+      { type: "message", timestamp: "2026-10-01T11:00:00Z", message: { role: "user", content: "Fix APP-8" } },
+      { type: "message", timestamp: "2026-10-01T11:05:00Z", message: { role: "assistant", content: "Done" } },
+    ]),
+  ];
+  const result = await runScanner(home, [
+    "--since", "2026-10-01", "--until", "2026-10-02",
+    "--transcripts", `codex=${join(external, "custom codex")}`,
+    "--transcripts", `codex=${join(external, "archive")}`,
+    "--transcripts", `codex=${join(external, "custom codex")}`,
+    "--transcripts", `pi=${join(external, "custom pi")}`,
+  ]);
+  expect(result.exitCode).toBe(0);
+  expect(result.stderr).toBe("");
+  expect(result.stdout.trim().split("\n").map((line) => JSON.parse(line))).toEqual([
+    { source: "codex", project: "/work/demo", file: files[0], start: "2026-10-01T10:00:00.000Z", end: "2026-10-01T10:05:00.000Z", active_seconds: 300, first_prompt: "Fix APP-7", tickets: { "APP-7": "2026-10-01T10:00:00.000Z" }, pull_requests: [] },
+    { source: "codex", project: "/work/demo", file: files[1], start: "2026-10-01T10:00:00.000Z", end: "2026-10-01T10:05:00.000Z", active_seconds: 300, first_prompt: "Fix APP-7", tickets: { "APP-7": "2026-10-01T10:00:00.000Z" }, pull_requests: [] },
+    { source: "pi", project: "/work/demo", file: files[2], start: "2026-10-01T11:00:00.000Z", end: "2026-10-01T11:05:00.000Z", active_seconds: 300, first_prompt: "Fix APP-8", tickets: { "APP-8": "2026-10-01T11:00:00.000Z" }, pull_requests: [] },
+  ]);
+});
