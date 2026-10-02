@@ -12,7 +12,7 @@ Minimal, opinionated skills for AI agents.
 | [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
 | [coding-best-practices](skills/coding-best-practices/SKILL.md) | Keep changes small and TypeScript readable. |
 | [no-comments](skills/no-comments/SKILL.md) | Remove redundant comments and flag unclear code. |
-| [yeet](skills/yeet/SKILL.md) | Push a branch and open a draft PR. |
+| [yeet](skills/yeet/SKILL.md) | Open or update a PR and follow through on checks and reviews. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
 
 ## Install
@@ -23,4 +23,4 @@ bunx --bun skills add 0xr3ngar/bstack
 
 Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompted. Add `--global` to install across projects, or `--skill unslop` to pick one skill.
 
-[Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[Philosophy](PHILOSOPHY.md) · [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)

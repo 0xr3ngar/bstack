@@ -14,15 +14,17 @@ compatibility: State required tools, runtimes, and external access.
 
 State the outcome in one sentence.
 
-## Inputs
+## Scope
 
-List the information the user must provide. State the default scope when inputs are optional.
+State the default scope and how to find missing context. Name the decisions or actions that need authority beyond the request.
 
-## Steps
+## Work
 
-1. Inspect the relevant inputs.
-2. Perform the requested work.
-3. Verify the result and report any limits.
+Describe the task-specific steps the agent needs. Let it resolve routine uncertainty and recover from failures within scope.
+
+## Completion
+
+Define the evidence that proves the result. State what to deliver if a required tool or decision is unavailable. Finish independent work before handing back a blocker.
 
 ## Example
 

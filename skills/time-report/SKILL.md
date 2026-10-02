@@ -11,7 +11,7 @@ Estimate active work time per ticket from conversation history. These estimates 
 
 ## 1. Scan the conversations
 
-First locate the user's transcript files. Check the agent's configuration, environment, and any paths the user supplied. Verify that the directories contain session JSONL files; do not assume the defaults exist or contain the history the user wants. If the location is still unclear, ask the user.
+First locate the user's transcript files. Check the agent's configuration, environment, and any paths the user supplied. Verify that the directories contain session JSONL files; do not assume the defaults exist or contain the history the user wants. If locations remain unknown, report which paths you checked and ask only for the missing location. Complete the report for sources you can read.
 
 Run [the scanner](scripts/scan-sessions.ts) with Bun 1.4 or newer:
 
@@ -19,7 +19,7 @@ Run [the scanner](scripts/scan-sessions.ts) with Bun 1.4 or newer:
 bun <skill-dir>/scripts/scan-sessions.ts --since YYYY-MM-DD --until YYYY-MM-DD
 ```
 
-Both dates are local midnights and `--until` is exclusive. With no flags it scans yesterday. Pick the range from what the user asked, and if yesterday was a weekend day, ask whether they meant the last working day.
+Both dates are local midnights and `--until` is exclusive. With no flags it scans yesterday. Use the requested range, or yesterday even on weekends. State the dates in the report. Ask about the working calendar only when the requested range depends on it.
 
 Likely locations, also used as the scanner defaults:
 
@@ -46,8 +46,8 @@ Active time is the sum of the gaps between messages that are shorter than 15 min
 ## 2. Attribute time to tickets
 
 - A conversation lists every ticket key it mentions, including keys it only read about. Open the transcript near each key's first mention and keep only the tickets the user actually worked on in that conversation (planned, implemented, opened or fixed a PR).
-- When one conversation covers several tickets, split its active time by the stretch spent on each ticket if the transcript makes that clear. Otherwise split it evenly, and say so.
-- Short conversations that another conversation started (security reviews, Cursor subagents, `/tmp` worktrees) overlap their parent. Don't add them on top of the parent's time.
+- When one conversation covers several tickets, split its active time by the stretch spent on each ticket if the transcript makes that clear. If the split is unclear, keep the time unattributed and explain why. Do not turn a guess into billable hours.
+- Check for overlapping parent and subagent conversations. Count overlapping intervals once; a separate file or worktree does not establish separate human work time.
 - If a ticket has no conversation, say so. Don't invent time.
 
 ## 3. Look up PR state and waiting time
@@ -66,15 +66,16 @@ PR waiting time runs from open to merge. It is elapsed time, not work performed.
 
 Show a table with the ticket, PR state, estimated active work time, and optional PR waiting time. Round displayed work estimates to minutes. Do not imply second-level accuracy from Cursor's minute-level timestamps.
 
-List conversations with no ticket, their first prompts, and estimated activity so the user can assign them. State any assumptions about overlapping sessions or ticket attribution.
+Include unmatched conversations with their first prompts and estimated activity. Deliver the useful report without waiting for the user to classify every row. State any assumptions about overlapping sessions or ticket attribution.
 
 Stop here unless the user asked to log the hours.
 
 ## 5. Log to Jira when asked
 
-Confirm the table with the user before writing. Jira access is required for this step. If it is unavailable, return the table without claiming that hours were logged.
+Use allocations and hours the user already approved. If the report introduced unapproved estimates or uncertain allocations, show the proposed entries and ask for those details before writing. Do not request the same approval twice. Jira access is required; if it is unavailable, return the report and identify what remains unlogged.
 
 - Log only the approved active work estimate, rounded to the nearest whole minute. Set `started` to the first activity.
-- Add a comment with the conversation sources, attribution assumptions, and rounding note.
+- Include a concise source and rounding note in the worklog description. Keep local transcript contents private. Do not add a separate ticket comment unless asked.
 - Move a ticket to Done only if its PR is merged and the user asked for that transition.
-- Update an existing worklog for the same work instead of adding a duplicate.
+- Check existing worklogs before writing. Skip entries that already match; update only entries covered by the request. After a failed write, read the remote state before retrying to avoid duplicates.
+- Verify the saved entries and report what was logged, skipped, or blocked. A successful tool call alone is not proof of the saved hours.
