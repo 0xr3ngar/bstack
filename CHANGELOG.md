@@ -1,5 +1,11 @@
 # bStack
 
+## 0.1.1
+
+### Patch Changes
+
+- a09bfb9: Group the skills.sh listing by workflow and refresh it after releases. Simplify the README.
+
 ## 0.1.0
 
 ### Minor Changes
