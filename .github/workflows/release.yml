@@ -34,7 +34,6 @@ jobs:
           version: bun run version:skills
           title: "chore(release): version bStack"
           commit: "chore(release): version bStack"
-          prDraft: create
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create the GitHub release

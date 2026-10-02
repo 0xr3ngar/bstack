@@ -21,7 +21,7 @@ Write the summary as a short description of what changes for the user. Commit th
 ## Release a version
 
 1. Merge skill changes and their changesets into `main`.
-2. The Release workflow opens or updates a draft version PR. Changesets updates `package.json`, `bun.lock`, and `CHANGELOG.md` and consumes the pending changesets.
+2. The Release workflow opens or updates a version PR ready for review. Changesets updates `package.json`, `bun.lock`, and `CHANGELOG.md` and consumes the pending changesets.
 3. Review the version and changelog. Mark the PR ready and merge it when you want to release.
 4. The workflow checks the repository and creates `v<version>` at the merged commit, with that version's changelog entry as the release notes.
 
