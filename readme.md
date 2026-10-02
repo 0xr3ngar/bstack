@@ -18,3 +18,7 @@ Copy or symlink `skills/*` into wherever your agent loads skills (for example `.
 ## Credits
 
 Some skills started from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by [poteto](https://github.com/poteto). This repo trims and rewrites them for bstack.
+
+## License
+
+[MIT](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for upstream attribution.
