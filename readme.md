@@ -19,7 +19,7 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | [coding-best-practices](skills/coding-best-practices/SKILL.md) | Keep changes small and TypeScript readable. |
 | [no-comments](skills/no-comments/SKILL.md) | Remove redundant comments and flag unclear code. |
 | [yeet](skills/yeet/SKILL.md) | Push a branch and open a draft PR. |
-| [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from Claude Code and Cursor history. |
+| [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
 
 ## Usage
 
