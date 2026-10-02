@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a skill or script that behaves incorrectly.
+title: "bug: "
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Name the skill and the installed version or Git commit.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Agent and version, operating system, and Bun version if a script is involved.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include the request or command and the expected and actual results. Remove private data.
+    validations:
+      required: true
