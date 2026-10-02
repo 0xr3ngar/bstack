@@ -39,6 +39,6 @@ Investigate failures caused by the change, fix them, and rerun affected checks. 
 
 For implementation tasks in a repository that uses PRs, deliver a draft PR and tell the user it is ready for their comments. While it is a draft, follow comments attributable to the requesting user, fix and verify the changes, and resolve addressed threads. Present other reviewers' feedback with a recommendation. Once the user marks the PR ready, explain all new feedback and wait for their decision before making review changes or resolving threads. Recheck the PR state before publishing a fix.
 
-Keep listening through the host's event support or polling while the session runs. State when that support is unavailable; never promise monitoring after the session ends without a way to resume. Preserve enough context to avoid repeating completed work.
+Inspect the host's PR event tools and use an existing subscription or register one for the PR. Confirm it is active. Prefer subscriptions or listeners; poll only when event delivery is unavailable. Check the available tools before reporting a monitoring limitation, and preserve enough context to avoid repeating completed work.
 
 Continue through the delivery steps the user authorized. Merge, deployment, and messages require authority from the request or an applicable project policy. Do not ask for permission already given. Report the result, how you checked it, and any remaining limitation.
