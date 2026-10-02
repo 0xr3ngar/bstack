@@ -1,0 +1,16 @@
+name: Skill proposal
+description: Propose a focused workflow or an improvement to an existing skill.
+title: "skill: "
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow
+      description: What task should the skill complete? Include an example request and expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requirements
+      description: List required tools, external services, and any upstream material you plan to adapt.
