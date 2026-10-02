@@ -4,14 +4,6 @@
 
 Minimal, opinionated skills for AI agents.
 
-## Install
-
-```bash
-bunx --bun skills add 0xr3ngar/bstack
-```
-
-Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompted. Add `--global` to install across projects, or `--skill unslop` to pick one skill.
-
 ## Skills
 
 | Skill | What it does |
@@ -22,5 +14,13 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | [no-comments](skills/no-comments/SKILL.md) | Remove redundant comments and flag unclear code. |
 | [yeet](skills/yeet/SKILL.md) | Push a branch and open a draft PR. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
+
+## Install
+
+```bash
+bunx --bun skills add 0xr3ngar/bstack
+```
+
+Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompted. Add `--global` to install across projects, or `--skill unslop` to pick one skill.
 
 [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
