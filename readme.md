@@ -4,7 +4,7 @@
 
 Minimal, opinionated skills for AI agents.
 
-bStack aims to give agents more of the work between discovering a problem and merging its fix. Bring the agent in before you know the solution. Let it investigate, implement, test, and follow the PR through review. You step in when it needs your judgment. This follows the approach in [Theo's walkthrough](https://youtu.be/D8PikZ1KhUo?t=2170).
+bStack aims to give agents more of the work between discovering a problem and merging its fix. Don't spend an afternoon solving something the agent could figure out in minutes. Give it the problem first. If it gets stuck, put on your thinking hat. Until then, spare yourself the hat hair. Let it investigate, implement, test, and follow the PR through review. This follows the approach in [Theo's walkthrough](https://youtu.be/D8PikZ1KhUo?t=2170).
 
 The agent opens a draft PR, listens for your comments, checks its fixes, and resolves addressed threads. Once you mark the PR ready, it explains new feedback and waits for your decision. It uses the host's PR listeners when available and merges only with your authorization.
 
