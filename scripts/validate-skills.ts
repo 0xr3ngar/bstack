@@ -67,7 +67,8 @@ export async function validateSkills(root: string): Promise<string[]> {
 
   const markdownFiles = new Bun.Glob("**/*.md").scan({ cwd: root, dot: true });
   for await (const path of markdownFiles) {
-    if (path.startsWith("node_modules/") || path.startsWith(".git/")) {
+    const directory = path.split(/[\\/]/)[0];
+    if (directory === "node_modules" || directory === ".git") {
       continue;
     }
     const text = await readFile(join(root, path), "utf8");
