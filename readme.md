@@ -1,5 +1,7 @@
 # bStack
 
+[![skills.sh](https://img.shields.io/badge/skills.sh-bStack-black)](https://skills.sh/0xr3ngar/bstack)
+
 Minimal, opinionated skills for AI agents.
 
 ## Install
