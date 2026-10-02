@@ -71,8 +71,11 @@ async function main() {
         continue;
       }
       const file = join(root, relative);
-      const text = await readFile(file, "utf8");
       const modifiedAt = (await stat(file)).mtimeMs;
+      if (modifiedAt < since) {
+        continue;
+      }
+      const text = await readFile(file, "utf8");
       const transcript = readTranscript({ text, source, modifiedAt });
       const activity = measureActivity({ timestamps: transcript.timestamps, since, until, gapMinutes });
       if (!activity) {

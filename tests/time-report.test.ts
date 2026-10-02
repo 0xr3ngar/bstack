@@ -69,8 +69,8 @@ test("CLI reports Claude activity, tickets, and PRs without counting idle gaps",
 test("CLI reads nested Cursor transcripts using message timestamps and modification time", async () => {
   const home = await fixtureHome();
   const file = await writeTranscript(home, ".cursor/projects/demo/agent-transcripts/session/thread.jsonl", [
-    { role: "user", message: { content: "<timestamp>Thursday, Oct 1, 2026, 10:00 AM (UTC+2)</timestamp>\nFix APP-12" } },
-    { role: "user", message: { content: "<timestamp>Thursday, Oct 1, 2026, 10:05 AM (UTC+2)</timestamp>\nContinue" } },
+    { role: "user", message: { content: "<timestamp>Thursday, Oct 1, 2026, 10:00 AM (UTC+2)</timestamp>\n<user_query>\nFix APP-12\n</user_query>" } },
+    { role: "user", message: { content: "<timestamp>Thursday, Oct 1, 2026, 10:05 AM (UTC+2)</timestamp>\n<user_query>Continue</user_query>" } },
   ]);
   const modified = new Date("2026-10-01T08:06:00Z");
   await utimes(file, modified, modified);
@@ -188,3 +188,23 @@ test("CLI reads Pi messages and tool calls without attributing summaries or tool
     pull_requests: ["github.com/acme/demo/pull/12"],
   });
 });
+
+for (const [modifiedAt, expectedCount] of [
+  ["2026-09-30T23:59:59Z", 0],
+  ["2026-10-01T00:00:00Z", 1],
+  ["2026-10-03T00:00:00Z", 1],
+] satisfies ReadonlyArray<readonly [string, number]>) {
+  test(`CLI filters old files by modification time: ${modifiedAt}`, async () => {
+    const home = await fixtureHome();
+    const file = await writeTranscript(home, ".claude/projects/demo/session.jsonl", [
+      { type: "user", timestamp: "2026-10-01T10:00:00Z", message: { content: "Fix APP-7" } },
+      { type: "assistant", timestamp: "2026-10-01T10:05:00Z", message: { content: "Done" } },
+    ]);
+    const modified = new Date(modifiedAt);
+    await utimes(file, modified, modified);
+    const result = await runScanner(home, ["--since", "2026-10-01", "--until", "2026-10-02"]);
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toBe("");
+    expect(result.stdout.trim().split("\n").filter(Boolean)).toHaveLength(expectedCount);
+  });
+}
