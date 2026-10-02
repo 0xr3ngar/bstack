@@ -4,7 +4,9 @@
 
 Minimal, opinionated skills for AI agents.
 
-Give the agent a task. It opens a draft PR and works through your comments, checks the fixes, and resolves addressed threads. Once you mark the PR ready, it explains new feedback and waits for your decision. It uses your agent host's PR listeners when available.
+bStack aims to give agents more of the work between discovering a problem and merging its fix. Bring the agent in before you know the solution. Let it investigate, implement, test, and follow the PR through review. You step in when it needs your judgment. This follows the approach in [Theo's walkthrough](https://youtu.be/D8PikZ1KhUo?t=2170).
+
+The agent opens a draft PR, listens for your comments, checks its fixes, and resolves addressed threads. Once you mark the PR ready, it explains new feedback and waits for your decision. It uses the host's PR listeners when available and merges only with your authorization.
 
 ## Skills
 
