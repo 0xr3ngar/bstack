@@ -9,17 +9,19 @@ Measure how long the user worked, per ticket, from their conversation history. T
 
 ## 1. Scan the conversations
 
-Run `scan_sessions.py` from this skill's folder:
+Run [the scanner](scripts/scan-sessions.ts) with Bun 1.4 or newer:
 
 ```bash
-python3 <skill-dir>/scan_sessions.py --since YYYY-MM-DD --until YYYY-MM-DD
+bun <skill-dir>/scripts/scan-sessions.ts --since YYYY-MM-DD --until YYYY-MM-DD
 ```
 
 Both dates are local midnights and `--until` is exclusive. With no flags it scans yesterday. Pick the range from what the user asked, and if yesterday was a weekend day, ask whether they meant the last working day.
 
-The script reads `~/.claude/projects/*/*.jsonl` and `~/.cursor/projects/*/agent-transcripts/**/*.jsonl`. It prints one JSON line per conversation with `source`, `project`, `file`, `start`, `end`, `active_seconds`, `first_prompt`, `tickets` (key and the time it was first mentioned), and `pull_requests`.
+The script reads `~/.claude/projects/*/*.jsonl` and `~/.cursor/projects/*/agent-transcripts/**/*.jsonl`. It prints UTC timestamps in one JSON line per conversation with `source`, `project`, `file`, `start`, `end`, `active_seconds`, `first_prompt`, `tickets` (key and the time it was first mentioned), and `pull_requests`.
 
-Active time is the sum of the gaps between messages that are shorter than 15 minutes. Longer gaps count as time away. Cursor only timestamps user messages, to the minute, so the script uses the file's creation and last write time as the edges of a Cursor conversation.
+Conversations with less than one minute of estimated activity are omitted. Use `--home PATH` to scan another transcript directory and `--gap-minutes N` to change the idle threshold. No package installation is needed to run the scanner.
+
+Active time is the sum of the gaps between messages that are shorter than 15 minutes. Longer gaps count as time away. Cursor timestamps user messages to the minute. The scanner uses the last write time as the final edge when it follows those messages. It does not use filesystem creation times.
 
 ## 2. Attribute time to tickets
 

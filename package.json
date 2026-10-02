@@ -2,7 +2,7 @@
   "name": "bstack",
   "version": "0.0.0",
   "private": true,
-  "description": "Agent skills for writing, code review, pull requests, and time reports.",
+  "description": "bStack: Minimal, opinionated skills for AI agents.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -15,6 +15,10 @@
   "packageManager": "bun@1.4.0",
   "devDependencies": {
     "@types/bun": "1.3.11",
-    "typescript": "5"
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
   }
 }
