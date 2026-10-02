@@ -4,7 +4,9 @@ bStack aims for more completed work per human interruption. Give an agent a prob
 
 ## Start with the problem
 
-Bring the agent in when you discover a problem. Let it inspect the evidence and question assumptions before prescribing a solution. Routine uncertainty is something it should investigate. A reversible implementation choice rarely needs a handoff to the user.
+Give the agent a chance to solve the problem before spending your own time designing the solution. Let it inspect the evidence and try a simple approach. If it solves the problem, review the result. If it struggles, put on your thinking hat and help it work out why. Save your attention for the parts that need your judgment.
+
+Routine uncertainty is something the agent should investigate. A reversible implementation choice rarely needs a handoff to the user.
 
 ## Own the whole job
 
