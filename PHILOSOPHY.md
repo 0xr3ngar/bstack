@@ -26,7 +26,7 @@ Verification should fit the work. Inspect a UI change in the UI. Reproduce a bug
 
 Use permission already granted. Finish reversible preparation before asking for a decision. Merging, deploying, sending messages, or changing external records still needs authorization covering that action.
 
-Skills guide behavior. The host supplies tools, access, and the ability to keep running. If those are missing, complete what is possible and name the remaining blocker. Never claim a result was checked or promise continued monitoring without the means to do it.
+Use the host's PR event subscriptions or listeners to continue when feedback arrives. Discover and use that support before falling back to polling or asking the user to resume the task. Confirm the listener is active. If access or event support is missing, finish what is possible and name the specific blocker.
 
 ## Inspiration
 

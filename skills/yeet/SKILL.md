@@ -46,12 +46,14 @@ Wait for the user's decision before editing, pushing a review fix, replying, or 
 
 ## Keep the loop accurate
 
-Use the host's event or wake mechanism when available. Otherwise poll while the session is running, with bounded waits between reads. Track the PR, comment IDs and edits, and the last processed state so reconnecting does not repeat completed work. Fetch feedback received while you were fixing the previous batch.
+Inspect the host's available PR event subscriptions, listeners, and wake tools first. Use an existing subscription or register one for this PR through the supported mechanism, then confirm it is active. Prefer event delivery to a polling loop. Subscribe to comments, reviews, and PR state changes where supported; fetch the current PR and thread when an event arrives.
+
+Poll only for events the host cannot deliver, with bounded waits while the session runs. Track the PR, comment IDs and edits, and the last processed state so reconnecting does not repeat completed work. Fetch feedback received while you were fixing the previous batch.
 
 Recheck the PR's draft status before starting a fix and before pushing or resolving threads. If it became ready, pause pending review changes and present them for the user's decision. If it returns to draft, resume the draft workflow. Stop on merge or closure, or when the user asks.
 
 Report CI failures. Fix failures caused by your draft changes and recheck the final commit. After the PR is ready, explain failures and recommend a fix before proceeding unless the user already authorized that work.
 
-If the host cannot stay running or wake on feedback, say that automatic listening is unavailable and explain how to resume. Do not claim that a skill file alone provides background monitoring. On an access failure, preserve your place and report the blocker instead of silently abandoning the loop.
+Check the available tools and subscription status before declaring automatic listening unavailable. If neither event delivery nor continued polling is possible, explain the specific limitation and how to resume. Report a listener as active only after confirming it. On an access failure, preserve your place and report the blocker instead of silently abandoning the loop.
 
 Marking a PR ready does not authorize merging it. Merge only when explicitly authorized and the repository's requirements are satisfied.
