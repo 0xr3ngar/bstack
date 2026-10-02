@@ -1,9 +1,17 @@
+import { z } from "zod";
 import { access, readFile, readdir } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
+const metadataSchema = z.object({
+  name: z.string().max(64).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  description: z.string().trim().min(1).max(1024),
+  license: z.literal("MIT"),
+  compatibility: z.string().trim().min(1).max(500),
+  "disable-model-invocation": z.boolean().optional(),
+});
+const policySchema = z.object({
+  policy: z.object({ allow_implicit_invocation: z.literal(false) }),
+});
 
 export async function validateSkills(root: string): Promise<string[]> {
   const errors: string[] = [];
@@ -22,35 +30,16 @@ export async function validateSkills(root: string): Promise<string[]> {
       if (!frontmatter) {
         throw new Error("Missing YAML frontmatter.");
       }
-      const metadata: unknown = Bun.YAML.parse(frontmatter);
-      if (!isRecord(metadata)) {
-        throw new Error("Frontmatter must be a mapping.");
-      }
-      const name = metadata.name;
-      if (typeof name !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name) || name.length > 64) {
-        throw new Error("Name must use lowercase letters, digits, and single hyphens, with at most 64 characters.");
-      }
+      const metadata = metadataSchema.parse(Bun.YAML.parse(frontmatter));
+      const { name } = metadata;
       if (name !== folder.name || names.has(name)) {
         throw new Error("Name must be unique and match its folder.");
       }
       names.add(name);
-      if (typeof metadata.description !== "string" || !metadata.description.trim() || metadata.description.length > 1024) {
-        throw new Error("Description must contain 1 to 1024 characters.");
-      }
-      if (metadata.license !== "MIT") {
-        throw new Error("Declare license: MIT and retain upstream notices.");
-      }
-      if (typeof metadata.compatibility !== "string" || !metadata.compatibility.trim() || metadata.compatibility.length > 500) {
-        throw new Error("Declare compatibility requirements in 1 to 500 characters.");
-      }
-      const manual = metadata["disable-model-invocation"];
-      if (manual !== undefined && typeof manual !== "boolean") {
-        throw new Error("disable-model-invocation must be a boolean.");
-      }
-      if (manual === true) {
+      if (metadata["disable-model-invocation"] === true) {
         const policyPath = join(root, "skills", folder.name, "agents/openai.yaml");
         const config: unknown = Bun.YAML.parse(await readFile(policyPath, "utf8"));
-        if (!isRecord(config) || !isRecord(config.policy) || config.policy.allow_implicit_invocation !== false) {
+        if (!policySchema.safeParse(config).success) {
           throw new Error("Manual skills need policy.allow_implicit_invocation: false in agents/openai.yaml.");
         }
       }
