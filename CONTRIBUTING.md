@@ -52,6 +52,10 @@ Explain the problem and the resulting behavior. Keep the PR description short. M
 
 Keep unrelated changes in separate PRs. For a stack, base each PR on the preceding branch and merge from the bottom upward. Retarget the next PR to `main` after its parent merges. If the parent was squash-merged, rebase the remaining stack to remove the already merged commits.
 
+## Record release changes
+
+For changes to installed skills, run `bun run changeset` and commit the generated file. Describe what changes for the user. See the [release guide](docs/releases.md) for version selection and publishing.
+
 ## Credit upstream work
 
 Link the original source for adapted skills and preserve its copyright and license notices in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Contributions use the repository's [MIT license](LICENSE).
