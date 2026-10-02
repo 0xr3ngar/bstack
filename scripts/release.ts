@@ -1,4 +1,4 @@
-import { readFile, readdir } from "node:fs/promises";
+import { appendFile, readFile, readdir } from "node:fs/promises";
 import { parseArgs } from "node:util";
 
 export function releaseNotes(changelog: string, version: string): string {
@@ -38,7 +38,7 @@ export async function publishRelease(options: Readonly<{
   };
   const existing = await fetch(`${url}/tags/${tag}`, { headers });
   if (existing.ok) {
-    return `${tag} already exists.`;
+    return { created: false, message: `${tag} already exists.` };
   }
   if (existing.status !== 404) {
     throw new Error(`Cannot check release ${tag}: GitHub returned ${existing.status}.`);
@@ -59,7 +59,7 @@ export async function publishRelease(options: Readonly<{
   if (!response.ok) {
     throw new Error(`Cannot create release ${tag}: GitHub returned ${response.status}.`);
   }
-  return `Created ${tag}.`;
+  return { created: true, message: `Created ${tag}.` };
 }
 
 async function main() {
@@ -92,7 +92,10 @@ async function main() {
     version: manifest.version,
     notes,
   });
-  process.stdout.write(`${result}\n`);
+  if (process.env.GITHUB_OUTPUT) {
+    await appendFile(process.env.GITHUB_OUTPUT, `created=${result.created}\n`);
+  }
+  process.stdout.write(`${result.message}\n`);
 }
 
 if (import.meta.main) {

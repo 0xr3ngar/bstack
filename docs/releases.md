@@ -22,10 +22,10 @@ Write the summary as a short description of what changes for the user. Commit th
 
 1. Merge skill changes and their changesets into `main`.
 2. The Release workflow opens or updates a version PR ready for review. Changesets updates `package.json`, `bun.lock`, and `CHANGELOG.md` and consumes the pending changesets.
-3. Review the version and changelog. Mark the PR ready and merge it when you want to release.
+3. Review the version and changelog, then merge the PR when you want to release.
 4. The workflow checks the repository and creates `v<version>` at the merged commit, with that version's changelog entry as the release notes.
 
-The first pending changeset prepares version `0.1.0`. Installing from the default branch can include changes before their tagged release. GitHub releases do not gate skills.sh updates.
+Installing from the default branch can include changes before their tagged release. After creating a release, the workflow installs all skills from that commit in a temporary directory with telemetry enabled. This requests a skills.sh refresh; the site may take time to update. Ordinary pushes that reuse an existing release skip this step. Existing users still run `bunx --bun skills update` to update their installed copies.
 
 The workflow uses the repository's `GITHUB_TOKEN`. In GitHub's Actions settings, enable **Allow GitHub Actions to create and approve pull requests**. The workflow grants `contents: write` and `pull-requests: write`. It does not need an npm token.
 
@@ -44,7 +44,7 @@ The preview prints the version and notes without contacting GitHub. Do not run t
 
 ## Retry a release
 
-Run the Release workflow manually on `main`. It creates the release when pending changesets have been consumed and skips a version whose release already exists. GitHub errors fail the run instead of being treated as a missing release.
+Run the Release workflow manually on `main`. It creates the release when pending changesets have been consumed and skips a version whose release already exists. A manual run also retries the skills.sh install after a successful release lookup, so a failed refresh can be retried without recreating the release. GitHub errors fail the run instead of being treated as a missing release.
 
 Do not edit or reuse a published tag. Correct the skill with a new changeset and release a new version.
 
