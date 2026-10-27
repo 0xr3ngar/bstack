@@ -19,6 +19,7 @@ The agent opens a draft PR, listens for your comments, checks its fixes, and res
 | [coding-best-practices](skills/coding-best-practices/SKILL.md) | Deliver verified changes with small diffs and readable TypeScript. |
 | [no-comments](skills/no-comments/SKILL.md) | Remove redundant comments and flag unclear code. |
 | [yeet](skills/yeet/SKILL.md) | Open a draft PR and work through your review comments. |
+| [pr-debate](skills/pr-debate/SKILL.md) | Review a PR with a reviewer, a skeptic, and a judge that argue over each comment. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
 
 ## Install
