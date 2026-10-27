@@ -1,5 +1,11 @@
 # bStack
 
+## 0.3.0
+
+### Minor Changes
+
+- 0dbcf7b: Add the pr-debate skill. A reviewer, a skeptic, and a judge argue over each review comment for up to three rounds, and you get only the comments the judge keeps.
+
 ## 0.2.0
 
 ### Minor Changes
