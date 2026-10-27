@@ -1,7 +1,7 @@
 ---
 name: pr-debate
 description: "Review a PR with three subagents that argue over 2-3 rounds. A reviewer proposes comments, a skeptic argues they are noise, and a judge rules on each one. Use for /pr-debate, 'debate this PR', or an adversarial PR review."
-disable-model-invocation: true
+disable-model-invocation: false
 license: MIT
 compatibility: "Requires Git, an authenticated GitHub CLI, and subagents. Works best when the host can send follow-up messages to a running subagent."
 ---
