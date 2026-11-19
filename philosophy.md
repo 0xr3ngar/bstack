@@ -1,38 +1,50 @@
 # Philosophy
 
-bStack aims for more completed work per human interruption. Give an agent a problem, enough context, and clear boundaries. It should investigate, make decisions within those boundaries, and return with a result it has checked.
+Your attention is the scarce part of working with clankers. If every question about the code comes back to you, you still have to hold the whole problem in your head.
 
-## Start with the problem
+Start `/bmode`, give it the problem, and go do something else. The lead brings you back when a decision needs your judgment or the result is ready for review.
 
-Give the agent a chance to solve the problem before spending your own time designing the solution. Let it inspect the evidence and try a simple approach. If it solves the problem, review the result. If it struggles, put on your thinking hat and help it work out why. Save your attention for the parts that need your judgment.
+Suppose you want a CSV export of the filtered table.
 
-Routine uncertainty is something the agent should investigate. A reversible implementation choice rarely needs a handoff to the user.
+![Before bmode, you specify the columns, check the exporter, request tests and prompt the clanker to open a PR.](docs/diagrams/before-bmode.svg)
 
-## Own the whole job
+![With bmode, you request the export. A council reviews the plan, builders implement and test it, and the council reviews the code. The lead returns the draft PR.](docs/diagrams/with-bmode.svg)
 
-For an implementation task, produce a working change, a usable preview where relevant, and a draft PR. Tell the user the draft is open and ready for their comments. They can review on GitHub or in their review tool of choice.
+The lead coordinates a council of clankers. Each reviewer gets a first look at the plan. If one flags a problem, the lead checks it against the code and carries the objection, its reasoning and any revision into the next round. The builders take the reviewed plan through implementation and verification. The council reads the resulting diff, and the lead sends confirmed defects back for fixes. You get the draft PR in the thread where you asked for it.
 
-While the PR is a draft, listen for the user's comments, fix the issues, check the changes, and push the fixes. Give the user a verdict and a draft reply. Post or resolve only when the user asks. Keep that back-and-forth going without requiring the user to copy comments into chat. Bring feedback from other reviewers to the user with a recommendation.
+## Why interruptions matter
 
-The user decides when to mark the PR ready for review. From then on, explain incoming feedback and recommend whether to address it. Wait for their decision before changing code or resolving threads. The PR's state determines how the agent handles feedback; making it ready does not authorize a merge.
+At one tech company, Berkeley researchers saw people keep several AI tasks going while reviewing code or sitting in meetings. Work also crept into their breaks. In a separate BCG survey, workers who spent more effort overseeing AI reported more mental fatigue. Interruptions have a cost even when the work looks fine. In Gloria Mark and colleagues’ email experiment, interrupted participants worked faster and kept up the quality of their answers, but felt more stress and time pressure. [Berkeley][berkeley] · [BCG][bcg] · [Interruption study][interruptions]
 
-People still intervene when an agent gets stuck or a decision needs their judgment. Autonomy means handling more between those interventions. Ask with evidence and a recommendation, and continue work that does not depend on the answer.
+There’s still a reason to review the result. Workers in a Carnegie Mellon and Microsoft survey described spending their judgment on checking information and deciding how to use it. In a Harvard and Łódź experiment, people who had to think through AI advice were less likely to accept a wrong answer, though they liked the most effective designs least. And in a Harvard Business School field experiment, GPT-4 helped consultants do better work on some tasks and made them less likely to get another task right. [Critical thinking][thinking] · [Checking advice][checking] · [Consulting experiment][frontier]
 
-## Keep instructions small
+## When to step in
 
-A skill should define its outcome, constraints, and evidence of completion. Leave routine implementation choices to the agent. Add an instruction when it prevents a demonstrated failure; remove instructions that repeat what the agent already knows.
+I used to hand over a task with the solution already worked out. Now I give the clanker the problem and enough room to investigate. A model can follow a lead I missed and find a cause I didn’t know about. If I’ve already told it which line to change, it has little reason to look.
 
-Verification should fit the work. Inspect a UI change in the UI. Reproduce a bug and exercise its fix. Preserve meaning when rewriting prose. More tools, agents, or tokens do not establish a better result.
+The clanker is responsible for noticing when it is stuck. If it keeps trying the same fix, it should investigate another lead. If it reaches a choice only you can make, it comes back with what it tried, the choice, and its recommendation. Your job is to frame the problem, set the boundaries and judge the result. Theo describes giving the agent the problem at [33:00–37:00](https://youtu.be/D8PikZ1KhUo?t=1980) and following the work through delivery at [45:00–48:00](https://youtu.be/D8PikZ1KhUo?t=2700).
 
-## Work within the authority given
+## What the clanker owns
 
-Use permission already granted. Finish reversible preparation before asking for a decision. Merging, deploying, sending messages, or changing external records still needs authorization covering that action.
+A bug report should come back with the failing case and a fix that passes it. A UI change should come back with evidence from the UI. When you ask for a PR review, you get a verdict up front and a failure scenario for each defect. You decide which comments to post.
 
-Use the host's PR event subscriptions or listeners to continue when feedback arrives. Discover and use that support before falling back to polling or asking the user to resume the task. Confirm the listener is active. If access or event support is missing, finish what is possible and name the specific blocker.
+While your PR is a draft, the clanker follows your review comments, checks its fixes and pushes them. If another reviewer raises a point, it brings you a recommendation. Once you mark the PR ready, it waits for your decision before changing the code. Posting a reply, resolving a thread, or merging takes your explicit instruction.
 
-## Inspiration
+Keep each skill small enough to fork. Say what the outcome is, where the agent's authority ends and how to check the result. Add a rule when you can name the failure it prevents.
 
-Theo [@t3dotgg](https://github.com/t3dotgg) discusses this approach in [If you have a Claude sub, watch this](https://youtu.be/D8PikZ1KhUo). Two passages informed these defaults:
+## References
 
-- [33:00–37:00](https://youtu.be/D8PikZ1KhUo?t=1980), involving the agent early: "give the agent the problem instead of the solution".
-- [45:00–48:00](https://youtu.be/D8PikZ1KhUo?t=2700), following through on delivery: "the next time you check that thread, you're ready to merge".
+- Ranganathan and Ye. [AI Doesn’t Reduce Work—It Intensifies It][berkeley].
+- Bedard and colleagues. [When Using AI Leads to “Brain Fry”][bcg].
+- Mark, Gudith and Klocke. [The Cost of Interrupted Work][interruptions].
+- Lee and colleagues. [The Impact of Generative AI on Critical Thinking][thinking].
+- Buçinca, Malaya and Gajos. [To Trust or to Think][checking].
+- Dell’Acqua and colleagues. [Navigating the Jagged Technological Frontier][frontier].
+- Theo. [If you have a Claude sub, watch this](https://youtu.be/D8PikZ1KhUo).
+
+[berkeley]: https://hbr.org/2026/02/ai-doesnt-reduce-work-it-intensifies-it
+[bcg]: https://hbr.org/2026/03/when-using-ai-leads-to-brain-fry
+[interruptions]: https://www.ics.uci.edu/~gmark/chi08-mark.pdf
+[thinking]: https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf
+[checking]: https://iis.seas.harvard.edu/papers/2021/bucinca21trust.pdf
+[frontier]: https://doi.org/10.1287/orsc.2025.21838
