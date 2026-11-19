@@ -2,13 +2,15 @@
 
 [![skills.sh](https://img.shields.io/badge/skills.sh-bStack-black)](https://skills.sh/0xr3ngar/bstack)
 
+[Why bStack?](docs/why-bstack.md) · [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+
 Start a T3 Code thread with `/bmode`, describe the feature, and go do something else. Seriously, you can leave the tab. If you spend the next twenty minutes watching an agent type, I’ve built you a very elaborate loading screen.
 
 The idea is that the agents can wait on you. The lead coordinates a swarm to plan, build, test, and review the change. You come back to a verified draft PR or a specific question that needs your input.
 
 You can also give it a PR to review. It leads with a verdict, shows the code behind each finding and lets you choose which comments to post.
 
-Set your preferred models with `/bmode-setup`. The same workflow applies across repositories. [Why bStack?](docs/why-bstack.md)
+Set your preferred models with `/bmode-setup`. The same workflow applies across repositories.
 
 ## Install
 
@@ -39,5 +41,3 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
 | [presentation](skills/presentation/SKILL.md) | Build a slide deck with hand-drawn diagrams and Clawd, by default about your last two weeks. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
-
-[Why bStack?](docs/why-bstack.md) · [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
