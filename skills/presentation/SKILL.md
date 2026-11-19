@@ -2,7 +2,7 @@
 name: presentation
 description: "Build an HTML slide deck with hand-drawn Excalidraw-style diagrams and an animated Clawd on every slide. With a prompt, the deck covers that topic. With no prompt, it gives a helicopter view of the user's merged work from the last two weeks. Use for /presentation, 'make a presentation', 'make slides', or 'show what I did the last two weeks'."
 license: MIT
-compatibility: "Requires a browser to show the deck. The default two-week deck needs an authenticated GitHub CLI. Headless Chrome or another screenshot tool is needed to check the slides."
+compatibility: "Requires a browser with internet access to show the deck, because the deck loads Rough.js from a CDN. The default two-week deck needs an authenticated GitHub CLI. Headless Chrome or another screenshot tool is needed to check the slides."
 ---
 
 # Presentation
@@ -54,7 +54,7 @@ Rules for every slide:
 
 ## 3. Build the deck
 
-Copy the [deck template](assets/deck/index.html) folder, `assets/deck/`, to the output folder. It has no build step. Change only two files:
+Copy the [deck template](assets/deck/index.html) folder, `assets/deck/`, to the output folder. It has no build step. It loads Rough.js, which draws the hand-drawn shapes, from a CDN, so the deck needs internet access when it is shown. Change only two files:
 
 - `index.html`: one `<section class="slide">` for each slide.
 - `content.js`: the drawings (`SCENES`) and the Clawd walks (`TOURS`).
