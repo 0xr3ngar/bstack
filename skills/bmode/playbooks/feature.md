@@ -9,7 +9,7 @@ Use the named `Plan folder:` or existing `/bmode <slug>`. Reuse this thread's fo
 | Explicit user pause still in effect | Keep the work stopped until the user resumes. |
 | done | Return draft PR links, checks, proof, scores and gaps to the originating user thread. |
 | handed-off | Rejoin the recorded build and collect its result as below. |
-| plan-reviewed | Hand off from the recorded base. |
+| plan-reviewed | Apply the plan handoff rule below, including on resume. |
 | Legacy presented or approved | Apply the [state migration](../references/documents.md) and continue. |
 | Any earlier phase | Check the model and finish the next incomplete phase. |
 
@@ -25,7 +25,7 @@ Write research.md with a checked code map, repository checks and real surface, p
 
 Use [user first](../../user-first/SKILL.md) to show the change from the user's side, [foundational thinking](../../foundational-thinking/SKILL.md) for data and contracts, and [exhaust the design space](../../exhaust-the-design-space/SKILL.md) for two or three concrete options in one table. Choose one. Probe choices that a run can settle. For a refactor apply [redesign from first principles](../../redesign-from-first-principles/SKILL.md). Use [type system](../../type-system/SKILL.md) for typed contracts. Record inferred choices. Ask a focused question only when a consequential choice remains after checking the evidence.
 
-Write plan.md, plan-details.md, proposal.md and diagrams in the [document formats](../references/documents.md). Apply [unslop](../../unslop/SKILL.md). Record `drafted`. Run [swarm](../../swarm/SKILL.md) in plan mode to the target. Record each round. Render the plan and proposal with `html_preview` then `html_render`. Record the scores and assumptions. When the plan reaches the target, write `plan-reviewed base=<branch>` with the first PR base or trunk. Hand off in the same turn. If the user changes a design decision, update the documents and review the changed decision again.
+Write plan.md, plan-details.md, proposal.md and diagrams in the [document formats](../references/documents.md). Apply [unslop](../../unslop/SKILL.md). Record `drafted`. Run [swarm](../../swarm/SKILL.md) in plan mode to the target. Record each round. Render the plan and proposal with `html_preview` then `html_render`. Record the scores and assumptions. When the plan reaches the target, write `plan-reviewed base=<branch>` with the first PR base or trunk. By default, hand off in the same turn. If the request or later steering says “show me the plan first”, “plan only” or asks for approval before building, show the reviewed plan and wait in the originating thread. Record the request in request.md. Start /full-send only after the user explicitly authorizes building the current plan; record that decision in state.md. Feedback alone requests edits. Review a changed design again and show the revised plan before asking for the go-ahead.
 
 ## Hand off
 

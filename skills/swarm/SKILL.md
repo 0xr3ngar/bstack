@@ -26,6 +26,8 @@ Put the brief and one report per member or code area per round in the plan folde
 
 ## Run a round
 
+Before launching reviewers, check each selected provider account using the [provider usage procedure](../bmode-setup/references/defaults.md#provider-usage). If setup is absent, use the matching provider’s live usage report and the standalone floor above.
+
 Use `delegate_task` with shared isolation, `target.model` and the provider effort option in `target.options`. Launch fresh read-only reviewers in parallel. Begin each task with `Read <absolute path>/delegates.md before anything else.` Use the [delegate rules](../bmode-setup/references/delegates.md). If unavailable, include the rules in the task: work alone within scope, verify claims against files, write only the assigned report, run read-only git, post nothing and finish with `REPORT <path>`.
 
 Do not wait idle. When a result arrives, check its findings against the code
@@ -42,6 +44,6 @@ Check each finding against the files. Accept or reject it with a reason. Settle 
 
 After all blocking reviews return, apply accepted edits. Add “since round N” with the diff file, settled findings and earlier report paths to the next brief. Record a missing score as `no score`; that round cannot pass a score target.
 
-Stop when every required score reaches the target and that round produced no accepted findings. For unscored open reviews, stop when reviewers are satisfied. At the cap, show scores and open findings. If a required target is still unmet, report the specific blocker and the decision needed. A passing plan round releases the plan to the build immediately. Below the usage floor, finish the running round and start no new one.
+Stop when every required score reaches the target and that round produced no accepted findings. For unscored open reviews, stop when reviewers are satisfied. At the cap, show scores and open findings. If a required target is still unmet, report the specific blocker and the decision needed. Return a passing plan to the lead. The feature playbook handles any user-requested plan review before building. At or below the usage floor, finish the running round and start no new one on the affected account.
 
 Keep scores in the reply and the plan folder only. Summarize findings, disagreements and next steps. Keep the work within scope.

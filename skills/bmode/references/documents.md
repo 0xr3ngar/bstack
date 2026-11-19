@@ -32,7 +32,7 @@ code-swarm r<N> <scores>
 done
 ```
 
-The originating thread records its ID at frame. Once handed off, the build thread owns build-state writes and relays reports through its parent. After internal plan review reaches the target, record plan-reviewed with the first PR base or trunk. The feature request authorizes the build. Record an explicit user stop as paused, and append resumed when the user lifts it. Keep the original state history.
+The originating thread records its ID at frame. Once handed off, the build thread owns build-state writes and relays reports through its parent. After internal plan review reaches the target, record plan-reviewed with the first PR base or trunk. A plan-first request in request.md requires an explicit build go-ahead for the current reviewed plan in state.md. Preserve this instruction across resumes and migration; a passing swarm review alone cannot release that handoff. Record an explicit user stop as paused, and append resumed when the user lifts it. Keep the original state history.
 
 For older folders, recover the origin from the planning thread or launch record. Treat legacy `presented` and `approved base=<branch>` as historical progress. Inspect the plan and its latest swarm reports. If the current design passed, append plan-reviewed with the recorded or inferred base. Otherwise finish the internal review. Preserve existing handoffs, branches and PR progress. A later done or active build takes precedence. Honor any explicit user pause.
 
