@@ -3,7 +3,7 @@ name: yeet
 description: Open a draft PR and work through the user's review comments. Once ready for review, explain feedback and wait for direction. Trigger on "yeet".
 disable-model-invocation: true
 license: MIT
-compatibility: "Requires Git, an authenticated GitHub CLI, and repository push access."
+compatibility: "Requires Git, an authenticated GitHub CLI, and repository push access. The PR diagram needs GitHub CLI 2.102 or newer for image attachments, headless Chrome or another browser screenshot tool, and internet access."
 ---
 
 # Yeet
@@ -24,7 +24,51 @@ After the subject, use Linux-style git trailers only. Add `Assisted-by: Vendor:m
 
 Find the branch's existing PR before creating one. Open new PRs in draft and preserve an existing PR's status. The user decides when to mark it ready. Follow an explicit request for a different status.
 
-Match the title to the main commit subject. Explain the problem and resulting behavior in a short body. Include material testing limits, without a checklist or boilerplate sections. Keep the description current when the scope changes.
+Match the title to the main commit subject. Then write the description as described below.
+
+## Write the description
+
+The description is short enough to read in ten seconds. It has these parts, in this order, with no headings:
+
+1. One or two sentences that state the problem and what the PR changes.
+2. A hand-drawn diagram of the change.
+3. One or two sentences under the diagram that say what it shows.
+4. For a change the user can see, before and after screenshots in a two-column table.
+
+Leave out checklists, test plans, file lists and summaries of the diff. Mention a testing limit only when it changes the reviewer's decision. If the repository has a PR template with required sections, keep its sections and fill each one this briefly.
+
+Write the title and the body in plain words and short sentences, in the active voice. Cut filler, chatbot phrases and metaphors.
+
+### Draw the diagram
+
+Copy the [diagram template](assets/diagram.html) to a scratch folder outside the repository. Set `WIDTH`, `HEIGHT` and `SHAPES` for this change; the template lists the shape kinds. Draw what changed: the flow, the structure, or before and now. Keep it to about ten shapes.
+
+Put only short labels in the drawing, never sentences, because small handwriting is hard to read on GitHub. Show text examples, such as old and new messages, in a Markdown table in the body.
+
+Take a screenshot in a window of `WIDTH` by `HEIGHT`. With Chrome:
+
+```bash
+"<chrome>" --headless=new --hide-scrollbars --force-device-scale-factor=2 \
+  --window-size=<WIDTH>,<HEIGHT> --virtual-time-budget=5000 \
+  --screenshot=<scratch>/diagram.png "file://<scratch>/diagram.html"
+```
+
+Look at the image. Fix text that leaves its box and shapes that overlap, then take it again.
+
+### Attach the images
+
+Reference each image in the body by its local path, then upload it in the same command. GitHub CLI replaces the path with the uploaded address:
+
+```bash
+gh pr edit <number> --body-file <scratch>/body.md \
+  --attach "<scratch>/diagram.png#What the diagram shows"
+```
+
+In `body.md`, write a Markdown image whose address is the local path of the file, here `<scratch>/diagram.png`. Do not commit images to the repository or to a separate branch.
+
+When the scope of the PR changes, update the sentences, draw the diagram again and replace the image. If no screenshot tool is available, open the PR without the diagram and tell the user that it is missing.
+
+## Report the draft
 
 Tell the user the draft is open and ready for their comments. Include the link and current check status, then begin watching for feedback. This notification does not mark the PR ready on GitHub.
 
