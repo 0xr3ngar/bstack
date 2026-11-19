@@ -2,11 +2,13 @@
 
 [![skills.sh](https://img.shields.io/badge/skills.sh-bStack-black)](https://skills.sh/0xr3ngar/bstack)
 
-Start a T3 Code thread with `/bmode`, describe the feature, and go do something else. A council of clankers reviews the plan and the resulting code. The lead checks their objections, coordinates the builders and brings you a verified draft PR. If the team gets stuck or needs a decision only you can make, the lead comes back with a specific question.
+Start a T3 Code thread with `/bmode`, describe the feature, and go do something else. Seriously, you can leave the tab. If you spend the next twenty minutes watching an agent type, I’ve built you a very elaborate loading screen.
+
+The idea is that the agents can wait on you. The lead coordinates a swarm to plan, build, test, and review the change. You come back to a verified draft PR or a specific question that needs your input.
 
 You can also give it a PR to review. It leads with a verdict, shows the code behind each finding and lets you choose which comments to post.
 
-Set your preferred models with `/bmode-setup`. The same workflow applies across repositories. [Why bStack works this way](philosophy.md)
+Set your preferred models with `/bmode-setup`. The same workflow applies across repositories. [Why bStack?](docs/why-bstack.md)
 
 > Work in progress. I'm continuing to iterate on the skills and workflows.
 
@@ -40,4 +42,4 @@ bunx --bun skills add 0xr3ngar/bstack
 
 Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompted. Add `--global` to install across projects, or `--skill unslop` to pick one skill.
 
-[Philosophy](philosophy.md) · [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[Why bStack?](docs/why-bstack.md) · [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)

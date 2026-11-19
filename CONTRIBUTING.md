@@ -1,6 +1,6 @@
 # Contributing to bStack
 
-Keep each skill focused on one outcome. Explain when to use it, what it needs, and how the agent knows it is done. Follow the [bStack philosophy](philosophy.md).
+Keep each skill focused on one outcome. Explain when to use it, what it needs, and how the agent knows it is done. For the reasoning behind this workflow, read [Why I built bStack](docs/why-bstack.md).
 
 ## Set up the repository
 
