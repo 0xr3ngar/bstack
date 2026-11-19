@@ -1,5 +1,11 @@
 # bStack
 
+## 1.0.2
+
+### Patch Changes
+
+- 23205c6: Honor requests to read the feature plan before building. Check usage for each selected model’s provider account before launching work.
+
 ## 1.0.1
 
 ### Patch Changes
