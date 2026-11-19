@@ -40,6 +40,6 @@ Record handed-back. Check the diff against the plan and, for a stacked PR, verif
 
 For each stack, verify its top. In threads mode fetch and detach the lead checkout at the pushed head. In inline mode check out the top branch. Run every planned case on the real surface from research.md. Record the runs and gaps in build/verify.md. Record verified only for demonstrated behavior. If the repository has no real surface, say what remains unproved.
 
-Run [council](../council/SKILL.md) in code mode on the whole change. Give the exact head and commit range per PR. Reviewers use read-only git. Fetch and update the brief with new heads before each later round. Return accepted fixes to the PR owner, mark started, restack dependents after handback and verify affected behavior again. Record each round's scores in state.md.
+Run [swarm](../swarm/SKILL.md) in code mode on the whole change. Give the exact head and commit range per PR. Reviewers use read-only git. Fetch and update the brief with new heads before each later round. Return accepted fixes to the PR owner, mark started, restack dependents after handback and verify affected behavior again. Record each round's scores in state.md.
 
 Return the draft PR URLs, heads, checks, every round's scores, real-surface results and remaining gaps to the originating thread. Include them in the last message for the waiting lead. Record done when complete. Leave the PRs in draft. Leave merges, ready state, reviews, posts and resolutions to the user. Later PR feedback follows the upkeep route.
