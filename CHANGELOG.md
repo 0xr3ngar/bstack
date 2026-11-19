@@ -1,5 +1,11 @@
 # bStack
 
+## 1.0.0
+
+### Major Changes
+
+- Release bStack 1.0. Start with `/bmode` to take a feature request through swarm review, implementation, and verification to a draft pull request. Configure models with `/bmode-setup` or run a review directly with `/swarm`.
+
 ## 0.6.0
 
 ### Minor Changes
