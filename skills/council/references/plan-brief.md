@@ -14,7 +14,7 @@ Read the affected parts. Ask what you would build from scratch for these require
 
 Read <request>, <plan>, <details> and <proposal> in every round. Round one: attack the plan from every assigned lens. Divide the lenses across the members.
 
-10 means approve building exactly this plan without edits. Lower the score only for:
+10 means the plan can be built as written. This is an internal reviewer verdict. When the target is met, the lead hands the plan straight to the build. Lower the score only for:
 
 1. An instruction that fails or produces a wrong result. Cite `path:line`.
 2. Two statements that contradict each other. Include a proposal sentence that contradicts the plan or that a first-time reader cannot follow.
