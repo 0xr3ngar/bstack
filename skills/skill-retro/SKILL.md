@@ -2,18 +2,18 @@
 name: skill-retro
 description: "Review past agent conversations for recurring corrections or rework and update the skills that guided those decisions. Use when someone asks to tune their skills from how they work."
 license: MIT
-compatibility: "Requires readable conversation history from T3 Code or user-supplied transcripts. Applying changes requires an editable skill source."
+compatibility: "Reads T3 Code threads, local Claude Code, Cursor and Codex history, or supplied transcripts. Applying changes requires an editable skill source."
 ---
 
 # Skill retro
 
-Use the projects, dates, and skills the user names. By default, review the last two weeks in the current project and apply supported edits locally. An analysis-only request ends with proposed edits.
+By default, review all available conversation history for the current project and apply supported edits locally. Honor any projects, sources, date range, or skills the user specifies. An analysis-only request ends with proposed edits.
 
 ## Read the decisions in context
 
-In T3 Code, page through `t3_thread_list` for the project and read the relevant turns with `t3_thread_read`. Search can locate a remembered correction. Include ordinary runs that went well so you can tell when the original behavior was useful. For exports, read the turns in order with their speaker labels. If history is unavailable, ask for a thread or export.
+Search both T3 Code and the [native conversation stores](references/local-history.md) when available. In T3 Code, page through `t3_thread_list` for the project until you exhaust the requested range. Read the relevant turns with `t3_thread_read`. For supplied exports, read the turns in order with their speaker labels. Include runs that went well so you can tell when the original behavior was useful.
 
-For each candidate, trace the request, the agent's decision, what the user had to repeat or redo, and the outcome if known. Keep a private thread and turn reference. In a long history, process threads in batches and carry those notes forward. A fork or summary that repeats an incident counts as the same incident. State the dates and threads you actually covered.
+For each candidate, trace the request, the agent's decision, what the user had to repeat or redo, and the outcome if known. Keep a private session and turn reference. Process long histories in batches. Match copies across sources by session ID or the same sequence of turns. A T3 mirror, fork, or summary of one incident counts once. Report the sources, dates, and sessions actually covered, including gaps. If a source is unavailable, continue with the others. If none are readable, ask for a location or export.
 
 ## Find the instruction that would have helped
 
@@ -23,7 +23,7 @@ Read the skill that guided the decision, including the relevant step in any play
 
 ## Edit and replay
 
-Make the smallest change that would have altered the decision. Put it in the maintained source, following installed links back to their source where possible. If you only have a managed copy, give the user the proposed diff and identify the source you need. Keep transcript quotes, private links, and identifying details out of skill files and PR text.
+Make the smallest change that would have altered the decision. Resolve installed links and edit the user's maintained skill source when available. If their personal installation is the only writable copy, edit it directly and explain that a package update could overwrite it. If the only source is shared or read-only, show the diff and ask where their personal copy lives. Keep transcript quotes, private links, and identifying details out of skill files and PR text.
 
 Replay the original request against the edited step, using only what the agent knew at the time. Try a nearby request where the old behavior should still apply. If the edit fails either case, narrow or drop it. Run the skill repository's checks when available. Report the recurring decision, its evidence in the private reply, the file changed, and what the replay showed. When the evidence supports no change, explain why and leave the files alone.
 
