@@ -6,6 +6,8 @@ Once I’d figured that out, I could coast for a bit. Wire up the button. Reuse 
 
 When I started using agents, those stretches were the easiest to hand over. An agent could wire up the button while I did something else. Naturally, the first thing I did with that free time was open another thread.
 
+![My afternoon before agents had demanding decisions with quieter stretches between them. With three agent threads, the next decision came as soon as I switched tabs.](diagrams/my-afternoon.svg)
+
 ## Every tab had saved its hardest bit for me
 
 I’d switch to the first thread because it had a question about the export format. The second had a diff ready, so now I was reviewing code. In the third, a test was failing and I needed to remember why we’d picked that design in the first place. The clankers got the easy bits. Somehow I’d promoted myself to doing the hard bits of four jobs at once.
@@ -18,13 +20,13 @@ The bit that wore me down was deceptively small. A thread would ask, “Does thi
 
 That’s why a study from Berkeley stuck with me. The researchers spent eight months observing work at one tech company. They saw people running AI tasks during meetings and letting work creep into their breaks. In a separate BCG survey, people who spent more effort overseeing AI reported more fatigue. I recognized my own habit in both. Give me ten minutes back and apparently I’ll fill them with another agent to supervise. [Berkeley researcher interview](https://www.universityofcalifornia.edu/news/ai-promised-free-workers-time-uc-berkeley-haas-researchers-found-opposite) · [BCG research in Harvard Business Review](https://hbr.org/2026/03/when-using-ai-leads-to-brain-fry)
 
-## What I took from Theo’s walkthrough
+## The video that changed how I work
 
-In *If you have a Claude sub, watch this*, Theo talks about giving the agent the problem while there’s still something to figure out. That made me think about the times I’d spend half an hour tracing a bug, decide which function needed changing, then open a thread to tell an extremely capable model which three lines to write. What would it have found if I’d handed it the bug report half an hour earlier? [Theo on giving the agent the problem, 33:00–37:00](https://youtu.be/D8PikZ1KhUo?t=1980)
+Watching Theo’s *If you have a Claude sub, watch this* was the breakthrough for me. Up to that point, I’d sat down to solve a bug and brought in an agent once I knew which function needed changing. I thought that was what a good prompt looked like. Around 33 minutes in, Theo talks about handing the agent the problem while there’s still something to figure out. I remember thinking about all those half hours I’d spent tracing a bug just so I could tell a very capable model which three lines to write. What would it have found if I’d given it the bug report when I first opened it? [Theo on giving the agent the problem, 33:00–37:00](https://youtu.be/D8PikZ1KhUo?t=1980)
 
-Later, he talks about what you want to find the *next time* you check the thread. I liked that way of thinking about it. When I came back, I wanted a change I could try, a draft pull request, and some evidence that it worked. What I often found was a perfectly good plan and an agent waiting for me to type “go ahead.” [Theo on following the work through delivery, 45:00–48:00](https://youtu.be/D8PikZ1KhUo?t=2700)
+The other part that stuck with me came later, when he talked about what you want to find the next time you open the thread. I knew exactly what I wanted: a fix I could try, a draft PR, and a way to see that the original bug was gone. So why was I asking for a plan and setting myself up to come back twenty minutes later just to type “go ahead”? I’d put that interruption there myself. [Theo on following the work through delivery, 45:00–48:00](https://youtu.be/D8PikZ1KhUo?t=2700)
 
-I started thinking about which messages actually needed to come from me. “The customer expects all 500 rows in that file” might be information only I have. “Go find where the filter is applied” is something another agent could have said an hour ago.
+That video changed when I open a thread and what I ask for in the first message. Now I’ll hand over the bug as soon as I can describe what went wrong. If I know something the agent couldn’t reasonably discover, like a promise we made to a customer, I include it. Then I tell it what I want to come back to. It can figure out where to look, follow a lead I’d have missed, and try the fix. That left me with a question I ended up building bStack around: how much of the work between that first message and a PR actually needs me?
 
 ## The swarm idea had been sitting there for a while
 
@@ -37,6 +39,8 @@ Before I started experimenting in T3 Code, I tried Cursor Projects. You talk to 
 I loved that. Up to then, if one agent discovered something the others needed, *I* was the integration. I’d copy the finding, switch tabs, paste it into another conversation, then try to remember what I’d been doing in that tab before I interrupted myself. With Projects, I could tell the coordinator what I wanted and let it handle the conversations behind it.
 
 After a while, Projects felt a little restrictive for the experiments I wanted to run. I’d got curious about the coordinator’s job itself. What if an agent from a different lab challenged the plan before anybody wrote code? If two reviewers disagreed, could the lead settle it by checking the code? Could it be the one to ask “did anybody actually try this?” before the result landed back in my lap? That’s what I took into T3 Code.
+
+![Who coordinates research, implementation and testing, before and with Cursor Projects.](diagrams/one-conversation.svg)
 
 ## A few things I tried
 
@@ -54,6 +58,8 @@ What finally clicked was reading back through my own messages. Across different 
 
 That was the part worth turning into bStack. I wanted to keep the research, the disagreements, and the checks on the real thing. I also wanted to be able to go eat lunch somewhere between steps four and five.
 
+![Builders report on their parts. The lead verifies the whole feature in a preview.](diagrams/proof.svg)
+
 ## What the swarm does
 
 In bStack, the **swarm** is the team of AI agents working on your request. The lead is the one you talk to in T3 Code. It’s responsible for understanding what you asked for, organizing the work, and bringing the result back to that same thread. I usually give that seat to a current frontier model. Keeping the whole problem straight and knowing when another agent has made a convincing but irrelevant point is a job I’ll spend extra capability on. My pick changes as the models do. [Slopalytics](https://slopalytics.com/)
@@ -66,14 +72,9 @@ One agent traces the query and discovers that the screen loads 50 rows at a time
 
 That’s the part of swarms I still find cool. Nobody needed the whole answer up front. Two agents looking in different places found a gap, a third pulled their findings together, and the team could settle the question by trying the feature. I get a better export out of it without having to remember, halfway through lunch, that I should probably ask about pagination.
 
-<details>
-<summary>See the plan and code review loops</summary>
-
-![Plan and code review loops for the CSV export](diagrams/with-bmode.svg)
+![Reviewers return findings to the lead on the plan and to the builders on the implementation.](diagrams/with-bmode.svg)
 
 The lead proposes a plan. Reviewers look for gaps, and the lead revises it. Once the plan passes, builders implement and test it. Reviewers inspect the diff and send confirmed defects back for fixes. The lead returns the verified draft PR to the thread where you asked for it.
-
-</details>
 
 Sometimes the right move is to come get me. If I’d just said “export the table,” and the team found two equally plausible interpretations with different consequences for customers, I’d want to hear about that. Show me what you found and give me your recommendation. Choosing what we promise the customer is worth my attention. Counting the rows in a CSV is a job the swarm can finish.
 
