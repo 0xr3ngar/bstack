@@ -32,6 +32,7 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | --- | --- |
 | [bmode](skills/bmode/SKILL.md) | Route each request. For a feature, plan, build, verify and return draft PRs in the same conversation. |
 | [bmode-setup](skills/bmode-setup/SKILL.md) | Choose models and set workflow preferences. |
+| [skill-retro](skills/skill-retro/SKILL.md) | Find recurring corrections in your agent conversations and update the skills behind them. |
 | [swarm](skills/swarm/SKILL.md) | Review a plan, code change or open question in rounds. |
 | [full-send](skills/full-send/SKILL.md) | Build an internally reviewed feature plan and return draft PRs and proof to the originating thread. |
 | [yeet](skills/yeet/SKILL.md) | Open a draft PR and work through your review comments. |
