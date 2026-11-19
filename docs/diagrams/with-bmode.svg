@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="590" viewBox="0 0 660 590" role="img" aria-labelledby="title desc">
+  <title id="title">With /bmode</title>
+  <desc id="desc">You ask for a filtered CSV export. The lead and council iterate on the plan. Builders implement and test it. Council findings go through the lead for fixes and another code review. The lead returns the verified draft PR.</desc>
+  <defs>
+    <marker id="forward" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 8 4 0 8z" fill="#677781"/></marker>
+    <marker id="back" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 8 4 0 8z" fill="#77579e"/></marker>
+    <style>
+      text { font-family: Arial, sans-serif; fill: #202a32 }
+      .role { font-size: 17px; font-weight: bold }
+      .action { font-size: 16px }
+      .edge { font-size: 15px; fill: #604580 }
+      .next { fill: none; stroke: #677781; stroke-width: 2; marker-end: url(#forward) }
+      .return { fill: none; stroke: #77579e; stroke-width: 2.5; marker-end: url(#back) }
+    </style>
+  </defs>
+  <rect width="660" height="590" rx="12" fill="#fbfaf7"/>
+  <text x="28" y="39" font-size="26" font-weight="bold">With /bmode</text>
+  <rect x="28" y="62" width="604" height="52" rx="8" fill="#fff0be"/>
+  <text x="46" y="94" class="role">You</text>
+  <text x="151" y="94" class="action">“Add a CSV export of the filtered table.”</text>
+  <g class="next">
+    <path d="M90 115v32"/><path d="M90 199v27"/>
+    <path d="M90 278v50"/><path d="M90 380v27"/><path d="M90 459v53"/>
+  </g>
+  <g>
+    <rect x="28" y="150" width="365" height="48" rx="8" fill="#d9e8fa"/>
+    <text x="46" y="180" class="role">Lead</text><text x="151" y="180" class="action">Trace filters and draft the plan</text>
+    <rect x="35" y="222" width="365" height="48" rx="8" fill="#d3c6e6"/>
+    <rect x="28" y="229" width="365" height="48" rx="8" fill="#ebe4f4"/>
+    <text x="46" y="259" class="role">Council</text><text x="151" y="259" class="action">Review the plan in parallel</text>
+    <text x="106" y="309" class="action">Plan passes</text>
+    <rect x="28" y="331" width="365" height="48" rx="8" fill="#d3ecdf"/>
+    <text x="46" y="361" class="role">Builders</text><text x="151" y="361" class="action">Build and test the export</text>
+    <rect x="35" y="403" width="365" height="48" rx="8" fill="#d3c6e6"/>
+    <rect x="28" y="410" width="365" height="48" rx="8" fill="#ebe4f4"/>
+    <text x="46" y="440" class="role">Council</text><text x="151" y="440" class="action">Review the diff in parallel</text>
+    <text x="106" y="491" class="action">Checks and review pass</text>
+  </g>
+  <path class="return" d="M401 252h18q12 0 12-12v-54q0-12-12-12h-23"/>
+  <text x="448" y="206" class="edge">Council flags a gap.</text>
+  <text x="448" y="227" class="edge">Lead revises the plan.</text>
+  <path class="return" d="M401 433h18q12 0 12-12v-54q0-12-12-12h-23"/>
+  <text x="448" y="384" class="edge">Lead confirms a defect.</text>
+  <text x="448" y="405" class="edge">Builders fix and retest.</text>
+  <rect x="28" y="516" width="604" height="52" rx="8" fill="#fff0be"/>
+  <text x="46" y="548" class="role">You</text><text x="151" y="548" class="action">Get the verified draft PR in your thread.</text>
+</svg>

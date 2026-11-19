@@ -8,7 +8,7 @@ Suppose you want a CSV export of the filtered table.
 
 ![Before bmode, you specify the columns, check the exporter, request tests and prompt the clanker to open a PR.](docs/diagrams/before-bmode.svg)
 
-![With bmode, you request the export. The council sends plan findings back to the lead and code defects back to the builders for another round. The lead returns the draft PR.](docs/diagrams/with-bmode.png)
+![With bmode, you request the export. The council sends plan findings back to the lead and code defects back to the builders for another round. The lead returns the draft PR.](docs/diagrams/with-bmode.svg)
 
 The lead coordinates a council of clankers. Each reviewer gets a first look at the plan. If one flags a problem, the lead checks it against the code and carries the objection, its reasoning and any revision into the next round. The builders take the reviewed plan through implementation and verification. The council reads the resulting diff, and the lead sends confirmed defects back for fixes. You get the draft PR in the thread where you asked for it.
 
