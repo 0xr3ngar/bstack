@@ -29,8 +29,8 @@ The agent opens a draft PR, listens for your comments, checks and pushes its fix
 | [why](skills/why/SKILL.md) | Trace a decision through its history. |
 | [swarm](skills/swarm/SKILL.md) | Review a plan, code change or open question in rounds. |
 | [bmode-setup](skills/bmode-setup/SKILL.md) | Choose models and set workflow preferences. |
-| [bmode](skills/bmode/SKILL.md) | Route each request and take features from research through plan approval. |
-| [full-send](skills/full-send/SKILL.md) | Build an approved plan in a fresh thread and prove the resulting draft PRs. |
+| [bmode](skills/bmode/SKILL.md) | Route each request. For a feature, plan, build, verify and return draft PRs in the same conversation. |
+| [full-send](skills/full-send/SKILL.md) | Build an internally reviewed feature plan and return draft PRs and proof to the originating thread. |
 
 ## Install
 

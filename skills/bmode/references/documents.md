@@ -19,12 +19,11 @@ Only features use a plan folder. Get the common Git directory with `git rev-pars
 Append `<date> <phase> <result>` to state.md. Use these entries in order as the work advances:
 
 ```text
-framed
+framed origin=<thread>
 researched
 drafted
 plan-council r<N> <scores>
-presented
-approved base=<branch>
+plan-reviewed base=<branch>
 handed-off <thread>
 pr <n> <branch> <thread or inline> <started, handed-back or accepted>
 built <prs>
@@ -33,7 +32,9 @@ code-council r<N> <scores>
 done
 ```
 
-Resume from the record. Change approved documents only on the user's word.
+The originating thread records its ID at frame. Once handed off, the build thread owns build-state writes and relays reports through its parent. After internal plan review reaches the target, record plan-reviewed with the first PR base or trunk. The feature request authorizes the build. Record an explicit user stop as paused, and append resumed when the user lifts it. Keep the original state history.
+
+For older folders, recover the origin from the planning thread or launch record. Treat legacy `presented` and `approved base=<branch>` as historical progress. Inspect the plan and its latest council reports. If the current design passed, append plan-reviewed with the recorded or inferred base. Otherwise finish the internal review. Preserve existing handoffs, branches and PR progress. A later done or active build takes precedence. Honor any explicit user pause.
 
 ## Plan
 
