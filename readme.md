@@ -2,13 +2,13 @@
 
 [![skills.sh](https://img.shields.io/badge/skills.sh-bStack-black)](https://skills.sh/0xr3ngar/bstack)
 
-Minimal, opinionated skills for AI agents.
+Start a T3 Code thread with `/bmode`, describe the feature, and go do something else. A council of clankers reviews the plan and the resulting code. The lead checks their objections, coordinates the builders and brings you a verified draft PR. If the team gets stuck or needs a decision only you can make, the lead comes back with a specific question.
+
+You can also give it a PR to review. It leads with a verdict, shows the code behind each finding and lets you choose which comments to post.
+
+Set your preferred models with `/bmode-setup`. The same workflow applies across repositories. [Why bStack works this way](philosophy.md)
 
 > Work in progress. I'm continuing to iterate on the skills and workflows.
-
-bStack aims to give agents more of the work between discovering a problem and merging its fix. Don't spend an afternoon solving something the agent could figure out in minutes. Give it the problem first. If it gets stuck, put on your thinking hat. Until then, spare yourself the hat hair. Let it investigate, implement, test, and follow the PR through review. This follows the approach in [Theo's walkthrough](https://youtu.be/D8PikZ1KhUo?t=2170).
-
-The agent opens a draft PR, listens for your comments, checks and pushes its fixes, and gives you a verdict and a draft reply. It posts or resolves a thread only when you ask. Once you mark the PR ready, it explains new feedback and waits for your decision. It uses the host's PR listeners when available and merges only with your authorization.
 
 ## Skills
 
