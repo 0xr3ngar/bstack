@@ -1,5 +1,11 @@
 # bStack
 
+## 1.2.0
+
+### Minor Changes
+
+- 6e0a14a: Add `/skill-retro` to find recurring corrections in conversation history and update the skills responsible.
+
 ## 1.1.0
 
 ### Minor Changes
