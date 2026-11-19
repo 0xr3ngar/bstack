@@ -10,29 +10,27 @@ You can also give it a PR to review. It leads with a verdict, shows the code beh
 
 Set your preferred models with `/bmode-setup`. The same workflow applies across repositories. [Why bStack?](docs/why-bstack.md)
 
-> Work in progress. I'm continuing to iterate on the skills and workflows.
-
 ## Skills
 
 | Skill | What it does |
 | --- | --- |
-| [unslop](skills/unslop/SKILL.md) | Cut filler and template language from prose. |
-| [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
-| [coding-best-practices](skills/coding-best-practices/SKILL.md) | Deliver verified changes with small diffs and readable TypeScript. |
+| [bmode](skills/bmode/SKILL.md) | Route each request. For a feature, plan, build, verify and return draft PRs in the same conversation. |
+| [bmode-setup](skills/bmode-setup/SKILL.md) | Choose models and set workflow preferences. |
+| [swarm](skills/swarm/SKILL.md) | Review a plan, code change or open question in rounds. |
+| [full-send](skills/full-send/SKILL.md) | Build an internally reviewed feature plan and return draft PRs and proof to the originating thread. |
 | [yeet](skills/yeet/SKILL.md) | Open a draft PR and work through your review comments. |
-| [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
-| [presentation](skills/presentation/SKILL.md) | Build a slide deck with hand-drawn diagrams and Clawd, by default about your last two weeks. |
+| [why](skills/why/SKILL.md) | Trace a decision through its history. |
+| [coding-best-practices](skills/coding-best-practices/SKILL.md) | Deliver verified changes with small diffs and readable TypeScript. |
 | [user-first](skills/user-first/SKILL.md) | Design from the user’s side of a change. |
 | [exhaust-the-design-space](skills/exhaust-the-design-space/SKILL.md) | Compare concrete designs before choosing one. |
 | [foundational-thinking](skills/foundational-thinking/SKILL.md) | Define data and contracts before writing logic. |
 | [root-cause-fix](skills/root-cause-fix/SKILL.md) | Trace a failure to its first wrong decision. |
 | [redesign-from-first-principles](skills/redesign-from-first-principles/SKILL.md) | Migrate every caller of a redesigned contract. |
 | [type-system](skills/type-system/SKILL.md) | Represent valid states in types. |
-| [why](skills/why/SKILL.md) | Trace a decision through its history. |
-| [swarm](skills/swarm/SKILL.md) | Review a plan, code change or open question in rounds. |
-| [bmode-setup](skills/bmode-setup/SKILL.md) | Choose models and set workflow preferences. |
-| [bmode](skills/bmode/SKILL.md) | Route each request. For a feature, plan, build, verify and return draft PRs in the same conversation. |
-| [full-send](skills/full-send/SKILL.md) | Build an internally reviewed feature plan and return draft PRs and proof to the originating thread. |
+| [unslop](skills/unslop/SKILL.md) | Cut filler and template language from prose. |
+| [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
+| [presentation](skills/presentation/SKILL.md) | Build a slide deck with hand-drawn diagrams and Clawd, by default about your last two weeks. |
+| [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
 
 ## Install
 
