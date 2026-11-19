@@ -6,6 +6,8 @@ The upstream license is reproduced below. It applies to the pstack material reta
 
 ## pstack
 
+The following skill texts adapt pstack: `user-first`, `exhaust-the-design-space`, `foundational-thinking`, `root-cause-fix`, `redesign-from-first-principles`, `type-system`, `why`.
+
 ```text
 MIT License
 

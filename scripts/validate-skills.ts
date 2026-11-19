@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { access, readFile, readdir } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { realpath, readFile, readdir } from "node:fs/promises";
+import { dirname, join, resolve, relative, sep } from "node:path";
 
 const metadataSchema = z.object({
   name: z.string().max(64).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -12,6 +12,35 @@ const metadataSchema = z.object({
 const policySchema = z.object({
   policy: z.object({ allow_implicit_invocation: z.literal(false) }),
 });
+
+export async function checkMarkdownLinks(root: string, path: string, installed = false) {
+  const links: string[] = [];
+  function collect(href: string) {
+    const target = href.split(/[?#]/)[0];
+    if (target && !/^(?:[a-z][a-z0-9+.-]*:|\/)/i.test(target)) links.push(target);
+    return "";
+  }
+  const markdown = await readFile(join(root, path), "utf8");
+  Bun.markdown.render(markdown, {
+    link: (_, { href }) => collect(href),
+    image: (_, { src }) => collect(src),
+  });
+  const errors: string[] = [];
+  for (const link of links) {
+    try {
+      const target = await realpath(resolve(root, dirname(path), decodeURIComponent(link)));
+      if (installed) {
+        const fromRoot = relative(await realpath(root), target);
+        if (fromRoot === ".." || fromRoot.startsWith(".." + sep)) {
+          errors.push(`${path}: Link outside installed skills: ${link}.`);
+        }
+      }
+    } catch {
+      errors.push(`${path}: Missing linked file ${link}.`);
+    }
+  }
+  return errors;
+}
 
 export async function validateSkills(root: string): Promise<string[]> {
   const errors: string[] = [];
@@ -58,25 +87,10 @@ export async function validateSkills(root: string): Promise<string[]> {
   for await (const file of markdownFiles) {
     const path = file.replaceAll("\\", "/");
     const directory = path.split("/")[0];
-    if (directory === "node_modules" || directory === ".git") {
+    if (directory === "node_modules" || directory === ".git" || directory === ".local") {
       continue;
     }
-    const text = await readFile(join(root, path), "utf8");
-    for (const match of text.matchAll(/\[[^\]]*\]\(([^\s)]+)\)/g)) {
-      const href = match[1];
-      if (!href || /^(?:[a-z]+:|#|\/)/i.test(href)) {
-        continue;
-      }
-      const target = href.split("#")[0];
-      if (!target) {
-        continue;
-      }
-      try {
-        await access(resolve(root, dirname(path), decodeURIComponent(target)));
-      } catch {
-        errors.push(`${path}: Missing linked file ${target}.`);
-      }
-    }
+    errors.push(...await checkMarkdownLinks(root, path));
   }
   return errors;
 }

@@ -30,13 +30,13 @@ policy:
   allow_implicit_invocation: false
 ```
 
-Do not add an `openai.yaml` file when no Codex-specific setting is needed. Do not make one skill depend on another being installed.
+Do not add an `openai.yaml` file when no Codex-specific setting is needed. A skill may use another bstack skill. Link it with a relative Markdown link from the file that holds the link: `../<name>/SKILL.md` from a `SKILL.md`, and `../../<name>/SKILL.md` from a file in `playbooks/` or `references/`. The validator then checks that the target exists. Say in one sentence what the skill does when that skill is not installed. Each supporting file lives in the folder of the one skill that owns it.
 
 ## Write instructions
 
 Use plain words and concrete steps. Keep facts, commands, and file paths accurate. Remove filler and unsupported claims. Follow the [unslop checklist](skills/unslop/SKILL.md) for prose. Preserve license text verbatim.
 
-Let the agent resolve routine uncertainty from available evidence. Define when a decision needs the user and what the agent can finish independently. Keep each installed skill self-contained; do not rely on the reader having this repository or its philosophy document.
+Let the agent resolve routine uncertainty from available evidence. Define when a decision needs the user and what the agent can finish independently. Keep each installed skill self-contained, except for links to sibling skills; do not rely on the reader having this repository or its philosophy document.
 
 State what happens when a required tool is unavailable. Ask for authorization before a workflow sends messages or writes to an external service unless the user's request already authorizes that action.
 
@@ -46,7 +46,7 @@ Use Bun and TypeScript for executable code. Prefer loops and explicit branches. 
 
 Add tests for observable behavior when changing scripts. Use synthetic transcripts for time-report tests. Never commit personal conversations, access tokens, or local agent configuration.
 
-Run the documented command from a copied skill folder outside this checkout. This catches dependencies on repository files that users will not install.
+Run the documented command from a copy of the whole `skills/` folder outside this checkout. This catches dependencies on repository files that users will not install.
 
 ## Open a pull request
 

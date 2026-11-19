@@ -2,7 +2,7 @@ import { afterEach, expect, test } from "bun:test";
 import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { validateSkills } from "../scripts/validate-skills.ts";
+import { checkMarkdownLinks, validateSkills } from "../scripts/validate-skills.ts";
 
 const directories: string[] = [];
 
@@ -52,4 +52,20 @@ test("dependency documentation is excluded on every platform", async () => {
   await mkdir(join(root, "node_modules/example"), { recursive: true });
   await writeFile(join(root, "node_modules/example/README.md"), "[Missing upstream file](missing.md)\n");
   expect(await validateSkills(root)).toEqual([]);
+});
+
+test("local plans do not participate in validation", async () => {
+  const root = await fixture();
+  await mkdir(join(root, ".local"));
+  await writeFile(join(root, ".local/plan.md"), "[draft](missing.md)");
+  expect(await validateSkills(root)).toEqual([]);
+});
+
+test("installed Markdown links must stay inside the installed skills", async () => {
+  const root = await fixture("[sibling][s] ![outside](../../readme.md)\n\n[s]: ../other/SKILL.md");
+  await mkdir(join(root, "skills/other"));
+  await writeFile(join(root, "skills/other/SKILL.md"), "# Other");
+  expect(await checkMarkdownLinks(join(root, "skills"), "example/SKILL.md", true)).toEqual([
+    "example/SKILL.md: Link outside installed skills: ../../readme.md.",
+  ]);
 });

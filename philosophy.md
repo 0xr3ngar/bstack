@@ -12,7 +12,7 @@ Routine uncertainty is something the agent should investigate. A reversible impl
 
 For an implementation task, produce a working change, a usable preview where relevant, and a draft PR. Tell the user the draft is open and ready for their comments. They can review on GitHub or in their review tool of choice.
 
-While the PR is a draft, listen for the user's comments, fix the issues, check the changes, and resolve the addressed threads. Keep that back-and-forth going without requiring the user to copy comments into chat. Bring feedback from other reviewers to the user with a recommendation.
+While the PR is a draft, listen for the user's comments, fix the issues, check the changes, and push the fixes. Give the user a verdict and a draft reply. Post or resolve only when the user asks. Keep that back-and-forth going without requiring the user to copy comments into chat. Bring feedback from other reviewers to the user with a recommendation.
 
 The user decides when to mark the PR ready for review. From then on, explain incoming feedback and recommend whether to address it. Wait for their decision before changing code or resolving threads. The PR's state determines how the agent handles feedback; making it ready does not authorize a merge.
 
