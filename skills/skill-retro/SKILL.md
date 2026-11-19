@@ -1,11 +1,13 @@
 ---
 name: skill-retro
-description: "Review past agent conversations for recurring corrections or rework and update the skills that guided those decisions. Use when someone asks to tune their skills from how they work."
+description: "Review past agent conversations for recurring corrections or rework and update the bStack skills that guided those decisions. Use when someone asks to tune their skills from how they work."
 license: MIT
 compatibility: "Reads T3 Code threads, local Claude Code, Cursor and Codex history, or supplied transcripts. Applying changes requires an editable skill source."
 ---
 
 # Skill retro
+
+Only propose or apply edits to instructions in the user’s own bStack skills. Verify the skill comes from `0xr3ngar/bstack` or the user’s bStack fork using the checkout or installer’s source record. Resolve symlinks and verify the target file is inside that skill. A matching name or a shared installation directory does not establish ownership. If ownership is unclear, report the finding and skip the edit.
 
 By default, review all available conversation history for the current project and apply supported edits locally. Honor any projects, sources, date range, or skills the user specifies. An analysis-only request ends with proposed edits.
 
@@ -27,4 +29,4 @@ Make the smallest change that would have altered the decision. Resolve installed
 
 Replay the original request against the edited step, using only what the agent knew at the time. Try a nearby request where the old behavior should still apply. If the edit fails either case, narrow or drop it. Run the skill repository's checks when available. Report the recurring decision, its evidence in the private reply, the file changed, and what the replay showed. When the evidence supports no change, explain why and leave the files alone.
 
-For example, the user requested CSV and JSON checks in two separate jobs. Both times the agent checked CSV and the user had to ask for JSON again. If the verification skill says to pick one format, change that step to check each format the user named. A request for a spot check should still get a sample.
+For example, the user requested CSV and JSON checks in two separate jobs. Both times the agent checked CSV and the user had to ask for JSON again. If the user’s bStack verification playbook says to pick one format, change that step to check each format the user named. A request for a spot check should still get a sample.

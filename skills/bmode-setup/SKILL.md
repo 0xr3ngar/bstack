@@ -1,6 +1,6 @@
 ---
 name: bmode-setup
-description: "Set up models and swarm reviewers, and tune the user's skill files from conversation history and their answers during setup."
+description: "Set up models and swarm reviewers, and tune the user's bStack skill files from conversation history and their answers during setup."
 license: MIT
 compatibility: "Model and swarm setup requires T3 Code and its MCP server `t3-code`. Skill tuning requires writable personal skill files and can use local history."
 ---
@@ -23,6 +23,6 @@ For full setup, use [skill-retro](../skill-retro/SKILL.md) in analysis-only mode
 
 Write the operating settings from questions 1–4 to `~/.config/bstack/preferences.md`, one line per override. Always save each selected member's provider instance and model ID on the swarm line. Omit other values that match a default.
 
-Apply the user's choices from question 5 directly to the relevant `SKILL.md` or playbook in their own skills, using skill-retro's edit and replay steps. If skill-retro is unavailable, make the approved edits and check each against an example request. Show the changed files and what the agent will do differently next time.
+Apply the user's choices from question 5 directly to the relevant `SKILL.md` or playbook in their own bStack skills, using skill-retro's ownership check and replay steps. If skill-retro is unavailable, verify each target resolves inside a skill from the bStack checkout, the user's bStack fork, or an installation with a matching source record. Skip unverified targets and check each approved edit against an example request. Show the changed files and what the agent will do differently next time.
 
 Before launching delegates, announce their models and effort. Start each message with `Read <absolute path>/delegates.md before anything else.` Use the absolute path of the [delegate instructions](references/delegates.md). Check claims before using them. Start fresh delegates for a new round and pass earlier reports as files.
