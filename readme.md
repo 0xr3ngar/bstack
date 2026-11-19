@@ -27,7 +27,7 @@ The agent opens a draft PR, listens for your comments, checks and pushes its fix
 | [redesign-from-first-principles](skills/redesign-from-first-principles/SKILL.md) | Migrate every caller of a redesigned contract. |
 | [type-system](skills/type-system/SKILL.md) | Represent valid states in types. |
 | [why](skills/why/SKILL.md) | Trace a decision through its history. |
-| [council](skills/council/SKILL.md) | Review a plan, code change or open question in rounds. |
+| [swarm](skills/swarm/SKILL.md) | Review a plan, code change or open question in rounds. |
 | [bmode-setup](skills/bmode-setup/SKILL.md) | Choose models and set workflow preferences. |
 
 ## Install

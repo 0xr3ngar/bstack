@@ -1,20 +1,20 @@
 ---
-name: council
-description: "Trigger this if the user says 'council'."
+name: swarm
+description: "Trigger this if the user says 'swarm'."
 license: MIT
 compatibility: "Requires T3 Code and its MCP server `t3-code`, Git, and an authenticated GitHub CLI."
 ---
 
-# Council
+# Swarm
 
 Stop if the t3-code MCP server is unavailable.
 
 Before an audit, address outstanding PR comments, fix known issues, and run
-relevant checks. Give council the updated implementation; do not defer known
+relevant checks. Give the swarm the updated implementation; do not defer known
 fixes until reviews return. If the user wants to discard the implementation
 and explore new ideas, skip fixes to code being replaced.
 
-Use the members named in the request, then the council line from [setup](../bmode-setup/SKILL.md). If setup is missing, use the requested members. Ask only for missing membership when a review needs it. Use the [settings](../bmode-setup/references/defaults.md) for effort, target, cap and usage floor. Without that file, use high effort for plans, medium for code, a target of 10, eight rounds and a 5% floor on each usage limit.
+Use the members named in the request, then the swarm line from [setup](../bmode-setup/SKILL.md). If setup is missing, use the requested members. Ask only for missing membership when a review needs it. Use the [settings](../bmode-setup/references/defaults.md) for effort, target, cap and usage floor. Without that file, use high effort for plans, medium for code, a target of 10, eight rounds and a 5% floor on each usage limit.
 
 Use `orchestrator_capabilities` to resolve named models and effort options. If a member is unavailable, report it and wait. Announce members, effort and cap in one line.
 
@@ -22,7 +22,7 @@ Use `orchestrator_capabilities` to resolve named models and effort options. If a
 
 Use a [plan brief](references/plan-brief.md) or [code brief](references/code-brief.md). For an open question, give each member the request, evidence and scope. Ask for a score in open mode only if requested.
 
-Put the brief and one report per member or code area per round in the plan folder's `council/`, or in a scratch folder. List USER DECISIONS as “not open for debate”. Include the method of [redesign from first principles](../redesign-from-first-principles/SKILL.md). If it is missing, ask whether this is what one would build from scratch and whether every reference reflects it. Require a one-sentence verdict.
+Put the brief and one report per member or code area per round in the plan folder's `swarm/`, or in a scratch folder. List USER DECISIONS as “not open for debate”. Include the method of [redesign from first principles](../redesign-from-first-principles/SKILL.md). If it is missing, ask whether this is what one would build from scratch and whether every reference reflects it. Require a one-sentence verdict.
 
 ## Run a round
 

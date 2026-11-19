@@ -1,4 +1,4 @@
-# Plan council brief
+# Plan swarm brief
 
 Request: <goal>. Round <N>. Reviewer: <member>. Scope: <lens or area>.
 
