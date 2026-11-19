@@ -1,5 +1,11 @@
 # bStack
 
+## 0.4.0
+
+### Minor Changes
+
+- 95a8366: Add the presentation skill. It builds an HTML slide deck with hand-drawn diagrams and an animated Clawd, about a topic you give or about your merged work of the last two weeks.
+
 ## 0.3.0
 
 ### Minor Changes
