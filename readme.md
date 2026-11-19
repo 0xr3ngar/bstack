@@ -10,6 +10,14 @@ You can also give it a PR to review. It leads with a verdict, shows the code beh
 
 Set your preferred models with `/bmode-setup`. The same workflow applies across repositories. [Why bStack?](docs/why-bstack.md)
 
+## Install
+
+```bash
+bunx --bun skills add 0xr3ngar/bstack
+```
+
+Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompted. Add `--global` to install across projects, or `--skill unslop` to pick one skill.
+
 ## Skills
 
 | Skill | What it does |
@@ -31,13 +39,5 @@ Set your preferred models with `/bmode-setup`. The same workflow applies across 
 | [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
 | [presentation](skills/presentation/SKILL.md) | Build a slide deck with hand-drawn diagrams and Clawd, by default about your last two weeks. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
-
-## Install
-
-```bash
-bunx --bun skills add 0xr3ngar/bstack
-```
-
-Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompted. Add `--global` to install across projects, or `--skill unslop` to pick one skill.
 
 [Why bStack?](docs/why-bstack.md) · [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
