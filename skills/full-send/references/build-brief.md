@@ -4,6 +4,8 @@
 
 Build <outcome>. Read <absolute paths to plan.md and plan-details.md>. Follow <repository instructions>. Keep <explicit exclusions> outside this PR.
 
+Originating thread: <thread>. Return draft PRs and proof there. The feature request covers implementation and verification. For a blocker, give the evidence, recovery attempted and specific input needed.
+
 ## Branch and contracts
 
 Work in <checkout>, on <branch>, from <base or lower PR link>. Use these shared contracts across the units:

@@ -1,6 +1,6 @@
 ---
 name: full-send
-description: "Build an approved plan from its shared folder, prove the draft pull requests and run code review."
+description: "Build an internally reviewed feature plan from its shared folder, prove the draft pull requests and run code review."
 disable-model-invocation: true
 license: MIT
 compatibility: "Requires T3 Code and its MCP server `t3-code`, Git, and an authenticated GitHub CLI."
@@ -12,15 +12,17 @@ Read the [rules of every route](../bmode/SKILL.md) and apply them throughout. Us
 
 ## Preflight
 
-Stop if the t3-code MCP tools are absent. Check the sibling paths linked by this skill and its references. If one is missing, stop and print `bunx --bun skills add 0xr3ngar/bstack`. Load the [setup](../bmode-setup/SKILL.md) settings in order: the request, `~/.config/bstack/preferences.md`, then the [defaults and tool table](../bmode-setup/references/defaults.md). Use `orchestrator_capabilities` for each named model and effort. Report an unavailable model and wait for the user.
+Stop if the t3-code MCP tools are absent. Check the sibling paths linked by this skill and its references. If one is missing, stop and print `bunx --bun skills add 0xr3ngar/bstack`. Load the [setup](../bmode-setup/SKILL.md) settings in order: the request, `~/.config/bstack/preferences.md`, then the [defaults and tool table](../bmode-setup/references/defaults.md). Use `orchestrator_capabilities` for each named model and effort. If a required model is unavailable, report the choices to the originating lead for a decision.
 
-Require request.md, plan.md, plan-details.md and an approved entry in state.md. Report anything missing and stop. Get this thread's ID with `t3_thread_configure`. If handed-off names another thread, return its link and start nothing. Otherwise write `handed-off <this thread>` if absent. Resume after the last recorded phase. After a stop, continue only on the user's word in this build thread.
+Read request.md, plan.md, plan-details.md and state.md. The feature request authorizes the build. Use the [state record and legacy migration](../bmode/references/documents.md). Read the origin and plan-reviewed base. If the plan or internal review is incomplete, have the originating thread complete that phase and resume automatically. Preserve any existing build progress. Recover missing files or thread IDs from the plan and launch records before reporting a blocker.
+
+Get this thread's ID with `t3_thread_configure`. If done, return the recorded results. If an explicit pause is still in effect, preserve it. If another live thread has the handoff, identify it to the origin so it can collect the running build. Otherwise record this thread if needed and resume from the last completed step. Honor an explicit user stop. Accept a resume relayed by the originating thread.
 
 Read the plan documents, repository agent, contributing and writing rules, and the proof procedure in research.md. Split by the plan's PR table, preserving order and bases. Write one [build brief](references/build-brief.md) per PR in build/.
 
 ## Build
 
-Use the [PR owner procedure](references/pr-owner.md) in both modes. Check `claude -p "/usage"` before starting builders. Below the configured floor on any limit, start no new builder. If a design decision fails in the code, stop the build, write evidence in build/ and return to the user. Diagnose failures with [root cause fix](../root-cause-fix/SKILL.md).
+Use the [PR owner procedure](references/pr-owner.md) in both modes. Check `claude -p "/usage"` before starting builders. Below the configured floor on any limit, start no new builder. If a design decision fails in the code, write evidence in build/ and return it to the originating lead. The lead resolves it from the feature request or reruns internal design review and resumes the build. Escalate only a genuine blocker or consequential choice the evidence cannot settle. Diagnose failures with [root cause fix](../root-cause-fix/SKILL.md).
 
 Record each transition as `pr <n> <branch> <thread or inline> <state>`. Use the newest line for each PR.
 
@@ -40,4 +42,4 @@ For each stack, verify its top. In threads mode fetch and detach the lead checko
 
 Run [council](../council/SKILL.md) in code mode on the whole change. Give the exact head and commit range per PR. Reviewers use read-only git. Fetch and update the brief with new heads before each later round. Return accepted fixes to the PR owner, mark started, restack dependents after handback and verify affected behavior again. Record each round's scores in state.md.
 
-Report the PRs, every round's scores, the real-surface results and what remains unproved. Record done when complete. Leave the PRs in draft. Leave merges, ready state, reviews, posts and resolutions to the user. Later PR feedback follows the upkeep route.
+Return the draft PR URLs, heads, checks, every round's scores, real-surface results and remaining gaps to the originating thread. Include them in the last message for the waiting lead. Record done when complete. Leave the PRs in draft. Leave merges, ready state, reviews, posts and resolutions to the user. Later PR feedback follows the upkeep route.
