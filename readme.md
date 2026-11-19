@@ -21,6 +21,7 @@ The agent opens a draft PR, listens for your comments, checks its fixes, and res
 | [yeet](skills/yeet/SKILL.md) | Open a draft PR and work through your review comments. |
 | [pr-debate](skills/pr-debate/SKILL.md) | Review a PR with a reviewer, a skeptic, and a judge that argue over each comment. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
+| [presentation](skills/presentation/SKILL.md) | Build a slide deck with hand-drawn diagrams and Clawd, by default about your last two weeks. |
 
 ## Install
 

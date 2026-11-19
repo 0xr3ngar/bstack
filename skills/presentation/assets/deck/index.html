@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Two weeks on the bookshop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="deck">
+
+    <section class="slide center" data-scene="title">
+      <span class="clawd" data-clawd data-tour="title" role="img" aria-label="Clawd walking in and waving"></span>
+      <p class="eyebrow">Bookshop · March 3 to 17</p>
+      <h1 class="title">Two weeks, from&nbsp;above</h1>
+      <p class="byline">Sam Example</p>
+    </section>
+
+    <section class="slide" data-scene="map">
+      <span class="clawd" data-clawd data-tour="map" role="img" aria-label="Clawd walking along the steps of a purchase"></span>
+      <p class="eyebrow">The helicopter view</p>
+      <h1>Where the work landed</h1>
+      <svg class="scene" viewBox="0 0 1200 560" role="img" aria-label="The steps of a purchase, with the new features marked on each step"></svg>
+    </section>
+
+    <section class="slide" data-scene="pay">
+      <span class="clawd" data-clawd data-tour="pay" role="img" aria-label="Clawd tired of three pages, then happy with one"></span>
+      <p class="eyebrow">1 · Pay</p>
+      <h1>A buyer now pays on one page</h1>
+      <svg class="scene" viewBox="0 0 1200 560" role="img" aria-label="Before, paying took three pages. Now it takes one."></svg>
+      <div class="stats">
+        <div><b>3 to 1</b><span>pages between the cart and the order</span></div>
+        <div><b class="add">+9%</b><span>more carts end in an order</span></div>
+        <div><b class="del">−1,200</b><span>lines of page code deleted</span></div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="text">
+      <span class="clawd" data-clawd data-tour="text" role="img" aria-label="Clawd tired of the long text, then approving the short text"></span>
+      <p class="eyebrow">2 · Error messages</p>
+      <h1>Error messages now say what to do</h1>
+      <div class="compare">
+        <div class="card" data-tone="red">
+          <svg class="card-frame" aria-hidden="true"></svg>
+          <h2>Before</h2>
+          <p class="quote">An unexpected error occurred while processing the payment instrument. Reference code <b>PAY-4031</b>. Please retry the operation later.</p>
+        </div>
+        <div class="card" data-tone="green">
+          <svg class="card-frame" aria-hidden="true"></svg>
+          <span class="stamp" aria-hidden="true">clear</span>
+          <h2>Now</h2>
+          <p class="quote">Your bank declined the card.</p>
+          <p class="quote"><b>What to do:</b> Try another card, or pay with your wallet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-scene="fixes">
+      <span class="clawd" data-clawd data-tour="fixes" role="img" aria-label="Clawd squashing bugs"></span>
+      <p class="eyebrow">3 · Bug fixes</p>
+      <h1>Backlog cleared 😎</h1>
+      <p class="lede">6 bugs got fixed that were sitting in the backlog.</p>
+      <svg class="scene" viewBox="0 0 1200 560" role="img" aria-label="The 6 bug fixes, one line each"></svg>
+    </section>
+
+    <section class="slide center" data-scene="questions">
+      <span class="clawd" data-clawd data-tour="questions" role="img" aria-label="Clawd thinking, with a question mark"></span>
+      <h1 class="title">Questions?</h1>
+    </section>
+
+  </main>
+  <nav id="dots" aria-label="Slides"></nav>
+  <script src="vendor/rough.js"></script>
+  <script src="content.js"></script>
+  <script src="deck.js"></script>
+  <script src="clawd.js"></script>
+</body>
+</html>
