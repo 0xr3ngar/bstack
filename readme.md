@@ -14,7 +14,7 @@ Want to read the plan first? Add “show me the plan before you build” to your
 
 You can also give it a PR to review. It leads with a verdict, shows the code behind each finding and lets you choose which comments to post.
 
-Set your preferred models with `/bmode-setup`. The same workflow applies across repositories.
+Set your preferred models with `/bmode-setup`. Choose which providers and reviewers a plain `/swarm` uses across repositories. You can name different reviewers for a single run.
 
 Please steal this setup. Fork bStack, keep the skills you like, and rewrite the ones that annoy you. Your agents can learn your bad habits instead of mine.
 

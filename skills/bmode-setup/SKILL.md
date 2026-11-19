@@ -17,7 +17,7 @@ When the user explicitly requests setup, ask the four questions together. During
 
 1. Which model should orchestrate features? Suggest Fable 5.2 at high effort.
 2. Which model should implement changes? Suggest Opus 5.5 at high effort.
-3. Which two or more models should review together? Offer **All recommended** with every available default across Claude Code, Cursor and Codex. Also offer each [provider preset](references/defaults.md#swarm-presets) and a custom mix. Show the exact members and any omissions before the user chooses. Offer only lineups with at least two available members.
+3. Which reviewers should a plain `/swarm` use by default? Show the user's saved lineup first and let them keep it. They can combine any [provider presets](references/defaults.md#swarm-presets), choose **All recommended** across all three, or pick individual models. Show **Claude Code + Cursor** and **Claude Code + Codex** as shortcuts when available. Expand each choice into its available reviewers, flag any missing models, and let the user add or remove members before saving. A lineup needs at least two models.
 4. Which other settings should change? Show each current value. Build mode accepts `threads` or `inline`.
 
 Write one line per override in `~/.config/bstack/preferences.md`. Always save each selected member's provider instance and model ID on the swarm line. Omit other values that match a default. Keep the workflow fixed.

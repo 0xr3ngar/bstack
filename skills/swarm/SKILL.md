@@ -14,7 +14,7 @@ relevant checks. Give the swarm the updated implementation; do not defer known
 fixes until reviews return. If the user wants to discard the implementation
 and explore new ideas, skip fixes to code being replaced.
 
-Use the members named in the request, then the swarm line from [setup](../bmode-setup/SKILL.md). If setup is missing, use the requested members. Ask only for missing membership when a review needs it. Use the [settings](../bmode-setup/references/defaults.md) for effort, target, cap and usage floor. Without that file, use high effort for plans, medium for code, a target of 10, eight rounds and a 5% floor on each usage limit.
+Use the user's saved `swarm:` line in `~/.config/bstack/preferences.md` when the request leaves reviewers unspecified. Reviewers named for one run override that lineup for that run only. If neither gives the members, ask which reviewers to use. The user can change their default with [setup](../bmode-setup/SKILL.md). Use the [settings](../bmode-setup/references/defaults.md) for effort, target, cap and usage floor. Without that file, use high effort for plans, medium for code, a target of 10, eight rounds and a 5% floor on each usage limit.
 
 Use `orchestrator_capabilities` to resolve named models and effort options. If a member is unavailable, report it and wait. Announce members, effort and cap in one line.
 
