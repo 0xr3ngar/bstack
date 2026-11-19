@@ -4,6 +4,39 @@ Some bstack skills adapt material from [pstack](https://github.com/cursor/plugin
 
 The upstream license is reproduced below. It applies to the pstack material retained in this repository. Changes made for bstack use the [repository license](LICENSE).
 
+## tstack and T3 Code
+
+Big shoutout to [Theo Browne](https://github.com/t3dotgg), the GOAT of agentic AI tooling. His [tstack skills](https://github.com/t3dotgg/tstack), especially `council` and `full-send`, helped shape how bStack reviews and ships work. [T3 Code](https://github.com/pingdotgg/t3code) gives the lead agent a place to delegate across models and bring the results back to one thread.
+
+<details>
+<summary>tstack license</summary>
+
+```text
+MIT License
+
+Copyright (c) 2026 Theo Browne
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+</details>
+
 ## pstack
 
 The following skill texts adapt pstack: `user-first`, `exhaust-the-design-space`, `foundational-thinking`, `root-cause-fix`, `redesign-from-first-principles`, `type-system`, `why`.

@@ -1,5 +1,11 @@
 # bStack
 
+## 1.0.1
+
+### Patch Changes
+
+- Illustrate the workflow behind bStack, expand the story of how Theo's walkthrough shaped it, and credit tstack and T3 Code.
+
 ## 1.0.0
 
 ### Major Changes
