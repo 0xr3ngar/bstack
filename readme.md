@@ -14,7 +14,7 @@ Want to read the plan first? Add “show me the plan before you build” to your
 
 You can also give it a PR to review. It leads with a verdict, shows the code behind each finding and lets you choose which comments to post.
 
-Run `/bmode-setup` to choose models and the reviewers a plain `/swarm` uses across repositories. Setup also looks for repeated corrections in your project history and asks which changes to write into your own skills. You can name different reviewers for a single run.
+Run `/bmode-setup` to choose models and the reviewers a plain `/swarm` uses across repositories. Setup also looks for repeated corrections in your project history and asks which changes to write into your own bStack skills. You can name different reviewers for a single run.
 
 Please steal this setup. Fork bStack, keep the skills you like, and rewrite the ones that annoy you. Your agents can learn your bad habits instead of mine.
 
@@ -31,8 +31,8 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | Skill | What it does |
 | --- | --- |
 | [bmode](skills/bmode/SKILL.md) | Route each request. For a feature, plan, build, verify and return draft PRs in the same conversation. |
-| [bmode-setup](skills/bmode-setup/SKILL.md) | Choose models and reviewers, then tune your skill files from past conversations and your answers. |
-| [skill-retro](skills/skill-retro/SKILL.md) | Review the project's full T3 Code, Claude Code, Cursor, and Codex history for recurring corrections and update the skills behind them. |
+| [bmode-setup](skills/bmode-setup/SKILL.md) | Choose models and reviewers, then tune your bStack skill files from past conversations and your answers. |
+| [skill-retro](skills/skill-retro/SKILL.md) | Review the project's full T3 Code, Claude Code, Cursor, and Codex history for recurring corrections and update the bStack skills behind them. |
 | [swarm](skills/swarm/SKILL.md) | Review a plan, code change or open question in rounds. |
 | [full-send](skills/full-send/SKILL.md) | Build an internally reviewed feature plan and return draft PRs and proof to the originating thread. |
 | [yeet](skills/yeet/SKILL.md) | Open a draft PR and work through your review comments. |
