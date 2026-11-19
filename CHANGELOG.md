@@ -1,5 +1,11 @@
 # bStack
 
+## 1.3.1
+
+### Patch Changes
+
+- 6b55b02: Limit skill tuning to verified bStack skill files in both setup and standalone retrospectives.
+
 ## 1.3.0
 
 ### Minor Changes
