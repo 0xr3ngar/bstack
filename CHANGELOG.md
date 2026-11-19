@@ -1,5 +1,12 @@
 # bStack
 
+## 0.6.0
+
+### Minor Changes
+
+- 3f9b013: Add configurable swarm reviews and seven design and investigation skills. Retire pr-debate and no-comments. Ask before posting replies or resolving review threads.
+- 6a12817: Route requests through nine playbooks. Hand internally reviewed feature plans to a fresh build thread. Return verified draft pull requests to the originating conversation.
+
 ## 0.5.0
 
 ### Minor Changes
