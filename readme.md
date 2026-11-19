@@ -14,6 +14,8 @@ You can also give it a PR to review. It leads with a verdict, shows the code beh
 
 Set your preferred models with `/bmode-setup`. The same workflow applies across repositories.
 
+Please steal this setup. Fork bStack, keep the skills you like, and rewrite the ones that annoy you. Your agents can learn your bad habits instead of mine.
+
 ## Install
 
 ```bash
