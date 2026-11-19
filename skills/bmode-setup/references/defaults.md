@@ -18,6 +18,8 @@ pull requests: draft, few and large, a native stack with gh stack when one build
 
 Read all three percentages with `claude -p "/usage"`: session, week, and Fable week. Apply the floor to each.
 
+A feature request authorizes planning, implementation, verification and draft PRs. The originating thread returns the results. This workflow is fixed.
+
 ## T3 Code tools
 
 | Need | Tool of `t3-code` |

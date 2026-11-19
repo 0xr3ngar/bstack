@@ -14,7 +14,7 @@ relevant checks. Give council the updated implementation; do not defer known
 fixes until reviews return. If the user wants to discard the implementation
 and explore new ideas, skip fixes to code being replaced.
 
-Use the members named in the request, then the council line from [setup](../bmode-setup/SKILL.md). If setup is missing, use the requested members or ask the user once. Ask once if no members are configured. Read the [settings](../bmode-setup/references/defaults.md) for effort, target, cap and usage floor.
+Use the members named in the request, then the council line from [setup](../bmode-setup/SKILL.md). If setup is missing, use the requested members. Ask only for missing membership when a review needs it. Use the [settings](../bmode-setup/references/defaults.md) for effort, target, cap and usage floor. Without that file, use high effort for plans, medium for code, a target of 10, eight rounds and a 5% floor on each usage limit.
 
 Use `orchestrator_capabilities` to resolve named models and effort options. If a member is unavailable, report it and wait. Announce members, effort and cap in one line.
 
@@ -42,6 +42,6 @@ Check each finding against the files. Accept or reject it with a reason. Settle 
 
 After all blocking reviews return, apply accepted edits. Add “since round N” with the diff file, settled findings and earlier report paths to the next brief. Record a missing score as `no score`; that round cannot pass a score target.
 
-Stop when every required score reaches the target and there are no accepted findings left from that round. For unscored open reviews, stop when reviewers are satisfied. At the cap, show scores and open findings. The user decides whether to accept them or run more rounds. Below the usage floor, finish the running round and start no new one.
+Stop when every required score reaches the target and that round produced no accepted findings. For unscored open reviews, stop when reviewers are satisfied. At the cap, show scores and open findings. If a required target is still unmet, report the specific blocker and the decision needed. A passing plan round releases the plan to the build immediately. Below the usage floor, finish the running round and start no new one.
 
 Keep scores in the reply and the plan folder only. Summarize findings, disagreements and next steps. Keep the work within scope.

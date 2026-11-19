@@ -11,7 +11,7 @@ Read the [defaults and T3 Code tools](references/defaults.md). Stop if the t3-co
 
 List Claude, Codex and Cursor models with `orchestrator_capabilities`. Show disabled providers as unavailable. Use the effort option each provider exposes. Report a missing model and wait for the user to choose one.
 
-Ask four questions together.
+When the user explicitly requests setup, ask the four questions together. During feature work, apply requested values, saved preferences and defaults without a setup interview. If a required model choice has no value, ask only for that choice when the phase needs it.
 
 1. Which model should orchestrate features? Suggest Fable 5.2 at high effort.
 2. Which model should implement changes? Suggest Opus 5.5 at high effort.
