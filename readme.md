@@ -8,6 +8,8 @@ Start a T3 Code thread with `/bmode`, describe the feature, and go do something 
 
 The idea is that the agents can wait on you. The lead coordinates a swarm to plan, build, test, and review the change. You come back to a verified draft PR or a specific question that needs your input.
 
+Want to read the plan first? Add “show me the plan before you build” to your request. The lead waits for your go-ahead before starting `/full-send`.
+
 You can also give it a PR to review. It leads with a verdict, shows the code behind each finding and lets you choose which comments to post.
 
 Set your preferred models with `/bmode-setup`. The same workflow applies across repositories.

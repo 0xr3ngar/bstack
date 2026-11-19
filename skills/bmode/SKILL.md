@@ -14,7 +14,7 @@ Start every user thread with `/bmode <request>`. Take the problem from the user.
 
 Check for the t3-code MCP tools. If absent, stop and say this workflow needs T3 Code. Check the sibling paths linked here and in the playbooks and references. If any are missing, stop and print `bunx --bun skills add 0xr3ngar/bstack`.
 
-Read the [settings and tool table](../bmode-setup/references/defaults.md). Apply the request, then `~/.config/bstack/preferences.md`, then the defaults. If the file is absent, use the defaults. Run [setup](../bmode-setup/SKILL.md) on request. Resolve the models and efforts needed by the current phase with `orchestrator_capabilities`. If a required model is unavailable, give the available choices and ask which one to use. Keep the current thread model outside the feature route.
+Read the [settings and tool table](../bmode-setup/references/defaults.md). Apply the request, then `~/.config/bstack/preferences.md`, then the defaults. If the file is absent, use the defaults. Run [setup](../bmode-setup/SKILL.md) on request. Resolve the models and efforts needed by the current phase with `orchestrator_capabilities`. If a required model is unavailable, give the available choices and ask which one to use. Apply the [provider usage check](../bmode-setup/references/defaults.md#provider-usage) at feature preflight and before launching agents. Keep the current thread model outside the feature route.
 
 ## Choose a route
 
@@ -37,7 +37,7 @@ Follow an explicit `Route:` line. Route `/bmode <slug>` for an existing plan fol
 1. Follow [unslop](../unslop/SKILL.md). Give the result first. Number questions. Draw structures as “Draw the diagram” in [yeet](../yeet/SKILL.md) describes.
 2. End each phase with one status line giving the phase, result and next phase. Use `send_to_user` for text the user must see before the turn ends.
 3. Read the repository’s skills and documents first.
-4. A feature request authorizes planning, implementation, verification and opening draft PRs. Keep the originating thread responsible for delivery. Infer routine choices from the request, evidence and repository rules. Interrupt only for an explicit stop, a genuine blocker after recovery attempts, or consequential input you cannot infer. For a blocker, give the evidence and ask only for the action or decision that unblocks it. Open PRs as drafts. Merge, post, resolve, approve or re-request review only on the user's word for that action.
+4. A feature request authorizes planning, implementation, verification and opening draft PRs. Keep the originating thread responsible for delivery. Infer routine choices from the request, evidence and repository rules. Honor a request to read or approve the plan before building. Otherwise interrupt only for an explicit stop, a genuine blocker after recovery attempts, or consequential input you cannot infer. For a blocker, give the evidence and ask only for the action or decision that unblocks it. Open PRs as drafts. Merge, post, resolve, approve or re-request review only on the user's word for that action.
 5. On “stop” or “pause”, immediately cancel each delegate with `task_cancel`. Send each started thread the following message with `t3_thread_send`, mode `restart`. Wait for each with `t3_thread_wait`, including delegated work. Wait again after a timeout, then report the state.
 
    > Stop. Stop every agent that you started, as rule 5 of bmode says, wait for each stopped thread with t3_thread_wait and wait again after a timeout, start nothing, and report the state.

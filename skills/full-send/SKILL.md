@@ -14,7 +14,7 @@ Read the [rules of every route](../bmode/SKILL.md) and apply them throughout. Us
 
 Stop if the t3-code MCP tools are absent. Check the sibling paths linked by this skill and its references. If one is missing, stop and print `bunx --bun skills add 0xr3ngar/bstack`. Load the [setup](../bmode-setup/SKILL.md) settings in order: the request, `~/.config/bstack/preferences.md`, then the [defaults and tool table](../bmode-setup/references/defaults.md). Use `orchestrator_capabilities` for each named model and effort. If a required model is unavailable, report the choices to the originating lead for a decision.
 
-Read request.md, plan.md, plan-details.md and state.md. The feature request authorizes the build. Use the [state record and legacy migration](../bmode/references/documents.md). Read the origin and plan-reviewed base. If the plan or internal review is incomplete, have the originating thread complete that phase and resume automatically. Preserve any existing build progress. Recover missing files or thread IDs from the plan and launch records before reporting a blocker.
+Read request.md, plan.md, plan-details.md and state.md. If the user requested plan-first review, verify their explicit go-ahead for the current plan before starting or resuming implementation. If it is missing, return the plan to the originating thread and wait. Use the [state record and legacy migration](../bmode/references/documents.md). Read the origin and plan-reviewed base. If the plan or internal review is incomplete, have the originating thread complete that phase and resume automatically. Preserve any existing build progress. Recover missing files or thread IDs from the plan and launch records before reporting a blocker.
 
 Get this thread's ID with `t3_thread_configure`. If done, return the recorded results. If an explicit pause is still in effect, preserve it. If another live thread has the handoff, identify it to the origin so it can collect the running build. Otherwise record this thread if needed and resume from the last completed step. Honor an explicit user stop. Accept a resume relayed by the originating thread.
 
@@ -22,7 +22,7 @@ Read the plan documents, repository agent, contributing and writing rules, and t
 
 ## Build
 
-Use the [PR owner procedure](references/pr-owner.md) in both modes. Check `claude -p "/usage"` before starting builders. Below the configured floor on any limit, start no new builder. If a design decision fails in the code, write evidence in build/ and return it to the originating lead. The lead resolves it from the feature request or reruns internal design review and resumes the build. Escalate only a genuine blocker or consequential choice the evidence cannot settle. Diagnose failures with [root cause fix](../root-cause-fix/SKILL.md).
+Use the [PR owner procedure](references/pr-owner.md) in both modes. Run the [provider usage check](../bmode-setup/references/defaults.md#provider-usage) before starting builders. If a design decision fails in the code, write evidence in build/ and return it to the originating lead. The lead resolves it from the feature request or reruns internal design review and resumes the build. Escalate only a genuine blocker or consequential choice the evidence cannot settle. Diagnose failures with [root cause fix](../root-cause-fix/SKILL.md).
 
 Record each transition as `pr <n> <branch> <thread or inline> <state>`. Use the newest line for each PR.
 
