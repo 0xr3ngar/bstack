@@ -4,6 +4,8 @@
 
 [Why bStack?](docs/why-bstack.md) · [Contributing](CONTRIBUTING.md) · [Releases](docs/releases.md) · [MIT license](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
 
+<img align="right" width="24%" src="docs/assets/bmode.png" alt="Smiling handheld console wearing a headset" />
+
 Start a T3 Code thread with `/bmode`, describe the feature, and go do something else. Seriously, you can leave the tab. If you spend the next twenty minutes watching an agent type, I’ve built you a very elaborate loading screen.
 
 The idea is that the agents can wait on you. The lead coordinates a swarm to plan, build, test, and review the change. You come back to a verified draft PR or a specific question that needs your input.
