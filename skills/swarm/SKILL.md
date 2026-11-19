@@ -28,7 +28,7 @@ Put the brief and one report per member or code area per round in the plan folde
 
 Before launching reviewers, check each selected provider account using the [provider usage procedure](../bmode-setup/references/defaults.md#provider-usage). If setup is absent, use the matching provider’s live usage report and the standalone floor above.
 
-Use `delegate_task` with shared isolation, `target.model` and the provider effort option in `target.options`. Launch fresh read-only reviewers in parallel. Begin each task with `Read <absolute path>/delegates.md before anything else.` Use the [delegate rules](../bmode-setup/references/delegates.md). If unavailable, include the rules in the task: work alone within scope, verify claims against files, write only the assigned report, run read-only git, post nothing and finish with `REPORT <path>`.
+Use `delegate_task` with shared isolation, the resolved member's `target.providerInstanceId` and `target.model`, and the provider effort option in `target.options`. Launch fresh read-only reviewers in parallel. Begin each task with `Read <absolute path>/delegates.md before anything else.` Use the [delegate rules](../bmode-setup/references/delegates.md). If unavailable, include the rules in the task: work alone within scope, verify claims against files, write only the assigned report, run read-only git, post nothing and finish with `REPORT <path>`.
 
 Do not wait idle. When a result arrives, check its findings against the code
 at once and decide what to fix while the other delegates run. Do not edit
