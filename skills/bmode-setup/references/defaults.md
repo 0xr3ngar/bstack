@@ -16,6 +16,14 @@ usage floor: 5% left on any limit
 pull requests: draft, few and large, a native stack with gh stack when one builds on another
 ```
 
+## Swarm presets
+
+| Provider | Default reviewers | Official model catalog |
+| --- | --- | --- |
+| Claude Code | Fable 5.2, Opus 5.5 | [Claude Code models](https://code.claude.com/docs/en/model-config) |
+| Cursor | Grok 4.7, Google Gemini 4 Neon, GLM 5.3 Flash, DeepSeek V4.1 Flash 1017 | [Cursor models](https://cursor.com/docs/models-and-pricing) |
+| Codex | GPT-6.2 Astra, GPT-6.2 Sol | [Codex models](https://developers.openai.com/codex/models/) |
+
 ## Provider usage
 
 At feature preflight, list the model and actual provider account selected for each role (lead, researchers, builders and swarm members), including request overrides. Check all assigned accounts. Before launching a batch or review round, refresh the accounts it will use. Route by the provider serving the model: a Claude model served by Cursor consumes Cursor usage. Read each shared account once per check and include any limits specific to its selected models.
