@@ -1,5 +1,11 @@
 # bStack
 
+## 1.1.0
+
+### Minor Changes
+
+- 6e59b4a: Check the latest models during setup and save a default swarm by combining provider presets or choosing individual reviewers. Name different reviewers for a single run.
+
 ## 1.0.2
 
 ### Patch Changes
