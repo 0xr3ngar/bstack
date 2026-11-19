@@ -4,7 +4,7 @@ Reproduce the failure on the real surface when possible. Read the actual state. 
 
 Use [root cause fix](../../root-cause-fix/SKILL.md). State the cause in one sentence. If the behavior is correct, report the evidence and change nothing. If the fix needs a behavior choice or a design, stop and present the options.
 
-Make the smallest change at the cause. When cheap, include a test that fails before the fix. Run steps 3 to 7 of the [PR owner procedure](../../full-send/references/pr-owner.md). Run [council](../../council/SKILL.md) in code mode to the target. After a fix, prove the affected behavior again. Report the cause, fix, real-surface run and scores.
+Make the smallest change at the cause. When cheap, include a test that fails before the fix. Run steps 3 to 7 of the [PR owner procedure](../../full-send/references/pr-owner.md). Run [swarm](../../swarm/SKILL.md) in code mode to the target. After a fix, prove the affected behavior again. Report the cause, fix, real-surface run and scores.
 
 ## Batch
 

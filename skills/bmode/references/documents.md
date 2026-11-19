@@ -10,7 +10,7 @@ Only features use a plan folder. Get the common Git directory with `git rev-pars
   plan-details.md   exact contracts and build reference
   proposal.md       architecture for a first-time reader
   diagrams/         HTML sources and double-size PNGs
-  council/          plan-brief.md, plan-r<N>-<member>.md,
+  swarm/          plan-brief.md, plan-r<N>-<member>.md,
                     code-brief.md, code-r<N>-<area>.md
   build/            brief-<pr>.md, verify.md
   state.md          one dated line per completed phase or PR transition
@@ -22,19 +22,19 @@ Append `<date> <phase> <result>` to state.md. Use these entries in order as the 
 framed origin=<thread>
 researched
 drafted
-plan-council r<N> <scores>
+plan-swarm r<N> <scores>
 plan-reviewed base=<branch>
 handed-off <thread>
 pr <n> <branch> <thread or inline> <started, handed-back or accepted>
 built <prs>
 verified
-code-council r<N> <scores>
+code-swarm r<N> <scores>
 done
 ```
 
 The originating thread records its ID at frame. Once handed off, the build thread owns build-state writes and relays reports through its parent. After internal plan review reaches the target, record plan-reviewed with the first PR base or trunk. The feature request authorizes the build. Record an explicit user stop as paused, and append resumed when the user lifts it. Keep the original state history.
 
-For older folders, recover the origin from the planning thread or launch record. Treat legacy `presented` and `approved base=<branch>` as historical progress. Inspect the plan and its latest council reports. If the current design passed, append plan-reviewed with the recorded or inferred base. Otherwise finish the internal review. Preserve existing handoffs, branches and PR progress. A later done or active build takes precedence. Honor any explicit user pause.
+For older folders, recover the origin from the planning thread or launch record. Treat legacy `presented` and `approved base=<branch>` as historical progress. Inspect the plan and its latest swarm reports. If the current design passed, append plan-reviewed with the recorded or inferred base. Otherwise finish the internal review. Preserve existing handoffs, branches and PR progress. A later done or active build takes precedence. Honor any explicit user pause.
 
 ## Plan
 

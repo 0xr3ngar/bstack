@@ -22,7 +22,7 @@ Follow an explicit `Route:` line. Route `/bmode <slug>` for an existing plan fol
 
 | Route | Request | Result |
 | --- | --- | --- |
-| [Feature](playbooks/feature.md) | New behavior or a refactor that needs design | Plan, run internal council, build, verify and return draft PRs here. |
+| [Feature](playbooks/feature.md) | New behavior or a refactor that needs design | Plan, run a swarm review, build, verify and return draft PRs here. |
 | [Bug](playbooks/bug.md) | Failure, red check or flaky test | Proved draft fix and code review, or evidence the behavior is correct. |
 | [Change](playbooks/change.md) | Small or specified change | Demonstration and proved draft PR. Review on request. |
 | [Review](playbooks/review.md) | Another contributor’s PR | Verdict, checked findings and draft comments. |
