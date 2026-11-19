@@ -1,4 +1,4 @@
-# Code council brief
+# Code swarm brief
 
 Request: <goal>. Round <N>. Reviewer: <member>. Scope: <lens or area>.
 

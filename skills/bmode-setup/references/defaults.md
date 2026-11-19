@@ -6,12 +6,12 @@ Use the request first, then `~/.config/bstack/preferences.md`, then these defaul
 harness: T3 Code, MCP server t3-code
 orchestrator: Fable 5.2, high
 implementer: Opus 5.5, high
-council: the members selected during setup
-council effort: high for a plan, medium for code
+swarm: the members selected during setup
+swarm effort: high for a plan, medium for code
 researchers: Opus 5.5, medium, at most 3 at a time
 build mode: threads
-council target: 10
-council round cap: 8
+swarm target: 10
+swarm round cap: 8
 usage floor: 5% left on any limit
 pull requests: draft, few and large, a native stack with gh stack when one builds on another
 ```
