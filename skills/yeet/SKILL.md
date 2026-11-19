@@ -78,7 +78,7 @@ Identify the requesting user's review account from established context. If it is
 
 Watch PR conversation comments, submitted reviews, and inline threads, including replies and edits. Act on the user's feedback within the task's scope without asking them to repeat it in chat. Explain comments from other people or bots and recommend whether to address them; wait for the user's direction before acting on those comments.
 
-Read the full thread and inspect the code before changing it. Fix the issue, run affected checks, and push the change. Resolve a thread only after verifying that the pushed change addresses it. Leave questions, disputed findings, and blocked work unresolved and explain what needs the user's judgment. Do not post separate replies unless asked.
+Read the full thread and inspect the code before changing it. Fix the issue, run affected checks, and push the change. Give the user a verdict and a draft reply. Explain any disputed finding or blocked fix. Post or resolve only when the user asks for that action.
 
 Tell the user what changed and keep watching for their next comments. Repeat until they mark the PR ready, close it, or ask you to stop.
 

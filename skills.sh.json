@@ -8,11 +8,11 @@
     },
     {
       "title": "Coding",
-      "skills": ["coding-best-practices", "no-comments"]
+      "skills": ["user-first", "exhaust-the-design-space", "foundational-thinking", "root-cause-fix", "redesign-from-first-principles", "type-system", "why", "coding-best-practices"]
     },
     {
       "title": "Workflow",
-      "skills": ["yeet", "pr-debate", "time-report", "presentation"]
+      "skills": ["council", "bmode-setup", "yeet", "time-report", "presentation"]
     }
   ]
 }

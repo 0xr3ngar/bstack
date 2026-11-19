@@ -1,3 +1,4 @@
+import { checkMarkdownLinks } from "./validate-skills.ts";
 import assert from "node:assert/strict";
 import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -35,6 +36,10 @@ for (const agent of ["codex", "cursor", "claude-code"]) {
         const installed = await readFile(join(project, container, skill, relative));
         assert.deepEqual(installed, await readFile(join(source, relative)));
       }
+    }
+    const installedRoot = join(project, container);
+    for await (const path of new Bun.Glob("**/*.md").scan({ cwd: installedRoot, dot: true })) {
+      assert.deepEqual(await checkMarkdownLinks(installedRoot, path, true), []);
     }
     const scanner = join(project, container, "time-report/scripts/scan-sessions.ts");
     const output = await run([process.execPath, scanner, "--home", project], project);
