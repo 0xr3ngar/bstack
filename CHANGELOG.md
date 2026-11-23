@@ -1,5 +1,11 @@
 # bStack
 
+## 1.4.0
+
+### Minor Changes
+
+- b051da0: Add `/scout` to research how a repository or a feature works and explain it with a short answer, a diagram and linked steps.
+
 ## 1.3.1
 
 ### Patch Changes
