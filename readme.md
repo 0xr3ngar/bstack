@@ -37,6 +37,7 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | [full-send](skills/full-send/SKILL.md) | Build an internally reviewed feature plan and return draft PRs and proof to the originating thread. |
 | [yeet](skills/yeet/SKILL.md) | Open a draft PR and work through your review comments. |
 | [why](skills/why/SKILL.md) | Trace a decision through its history. |
+| [scout](skills/scout/SKILL.md) | Research how a repository or a feature works and explain it with a diagram. |
 | [coding-best-practices](skills/coding-best-practices/SKILL.md) | Deliver verified changes with small diffs and readable TypeScript. |
 | [user-first](skills/user-first/SKILL.md) | Design from the user’s side of a change. |
 | [exhaust-the-design-space](skills/exhaust-the-design-space/SKILL.md) | Compare concrete designs before choosing one. |
