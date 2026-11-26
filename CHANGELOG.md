@@ -1,5 +1,11 @@
 # bStack
 
+## 1.5.0
+
+### Minor Changes
+
+- 2b506ad: Add pr-reply for writing GitHub PR comments and review replies with a short author credit.
+
 ## 1.4.0
 
 ### Minor Changes
