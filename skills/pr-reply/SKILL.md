@@ -12,7 +12,7 @@ Write the reply first. Leave a blank line, then add a small signature beneath a 
 ```md
 Move the empty-list check above `rows[0]`. An empty CSV reaches that lookup before the parser can return its “no rows” error.
 
-<img src="https://raw.githubusercontent.com/0xr3ngar/bstack/main/skills/pr-reply/assets/burgundy-rule.png" alt="" width="40" height="2"><br><sub>MODEL on behalf of USER</sub>
+<img src="https://raw.githubusercontent.com/0xr3ngar/bstack/main/skills/pr-reply/assets/burgundy-rule.png" alt="" width="40" height="7"><br><sub>MODEL on behalf of USER</sub>
 ```
 
 If the image is unavailable in the preview, omit the image and line break. Keep the small text signature as the only attribution.
