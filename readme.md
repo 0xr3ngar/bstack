@@ -47,5 +47,6 @@ Or use `npx skills add 0xr3ngar/bstack`. Choose the skills and agent when prompt
 | [type-system](skills/type-system/SKILL.md) | Represent valid states in types. |
 | [unslop](skills/unslop/SKILL.md) | Cut filler and template language from prose. |
 | [bro](skills/bro/SKILL.md) | Restate the last response in plain language. |
+| [pr-reply](skills/pr-reply/SKILL.md) | Write GitHub PR comments and review replies with a short author credit. |
 | [presentation](skills/presentation/SKILL.md) | Build a slide deck with hand-drawn diagrams and Clawd, by default about your last two weeks. |
 | [time-report](skills/time-report/SKILL.md) | Estimate time spent on tickets from agent conversation history. |
