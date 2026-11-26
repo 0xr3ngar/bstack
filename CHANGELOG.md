@@ -1,5 +1,11 @@
 # bStack
 
+## 1.5.1
+
+### Patch Changes
+
+- 56b0189: Render the burgundy signature rule as a thin, solid line in GitHub review replies.
+
 ## 1.5.0
 
 ### Minor Changes
